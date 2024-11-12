@@ -11,7 +11,7 @@ export const TeamData = [
     { korean_name: 'SSG 랜더스', english_name: 'ssg' }
 ];
 
-export const CalendarData = [
+export const ScheduleData = [
     { date: null, korean_name: null, english_name: null },
     { date: null, korean_name: null, english_name: null },
     { date: null, korean_name: null, english_name: null },
