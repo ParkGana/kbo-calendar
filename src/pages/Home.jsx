@@ -9,41 +9,41 @@ import User from '../components/User';
 import Modal from '../components/Modal';
 
 export default function Home() {
-    const [pageState, setPageState] = useState('일정');
-
-    const [isOpenRead, setIsOpenRead] = useState(false);
-    const [isOpenCreate, setIsOpenCreate] = useState(false);
-    const [isOpenUpdate, setIsOpenUpdate] = useState(false);
+    const [pageContent, setPageContent] = useState('일정');
+    const [modalContent, setModalContent] = useState();
+    const [isOpenModal, setIsOpenModal] = useState(false);
 
     return (
-        <PageLayout>
-            <ContentLayout>
+        <PageLayout category="basic">
+            <ContentLayout category="basic">
                 <SpaceBetween>
                     <Filter
+                        category="page"
                         options={[
-                            { label: '일정', handleClick: () => setPageState('일정'), isSelected: pageState === '일정' },
-                            { label: '시즌 전적', handleClick: () => setPageState('시즌 전적'), isSelected: pageState === '시즌 전적' }
+                            { label: '일정', isSelected: pageContent === '일정', handleClick: () => setPageContent('일정') },
+                            { label: '시즌 전적', isSelected: pageContent === '시즌 전적', handleClick: () => setPageContent('시즌 전적') }
                         ]}
                     />
-                    <User />
+                    <User category="simple" />
                 </SpaceBetween>
 
-                {pageState === '일정' && <Calendar handleOpenRead={() => setIsOpenRead(true)} handleOpenCreate={() => setIsOpenCreate(true)} />}
+                {pageContent === '일정' && (
+                    <Calendar
+                        handleOpenRead={() => {
+                            setModalContent('read');
+                            setIsOpenModal(true);
+                        }}
+                        handleOpenCreate={() => {
+                            setModalContent('create');
+                            setIsOpenModal(true);
+                        }}
+                    />
+                )}
 
-                {pageState === '시즌 전적' && <Record />}
+                {pageContent === '시즌 전적' && <Record />}
             </ContentLayout>
 
-            <Modal
-                category="read"
-                isOpen={isOpenRead}
-                handleClose={() => setIsOpenRead(false)}
-                handleUpdate={() => {
-                    setIsOpenRead(false);
-                    setIsOpenUpdate(true);
-                }}
-            />
-            <Modal category="create" isOpen={isOpenCreate} handleClose={() => setIsOpenCreate(false)} />
-            <Modal category="update" isOpen={isOpenUpdate} handleClose={() => setIsOpenUpdate(false)} />
+            <Modal category={modalContent} isOpen={isOpenModal} handleClose={() => setIsOpenModal(false)} handleUpdate={() => setModalContent('update')} />
         </PageLayout>
     );
 }

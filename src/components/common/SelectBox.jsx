@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { color } from '../../configurations/Color';
 import { typography } from '../../configurations/Typography';
-import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
 const Container = styled.div`
@@ -51,17 +50,15 @@ const Option = styled.div`
     }
 `;
 
-export default function SelectBox({ placeholder, value, options }) {
-    const [isOpen, setIsOpen] = useState(false);
-
+export default function SelectBox({ placeholder, value, options, isOpen, handleToggle }) {
     return (
-        <Container onClick={() => setIsOpen(!isOpen)}>
+        <Container onClick={handleToggle}>
             <Selected>{value ?? placeholder}</Selected>
             <Arrow>{isOpen ? '▲' : '▼'}</Arrow>
             <OptionContainer $isOpen={isOpen}>
-                {options.map((option) => {
-                    return <Option key={uuid()}>{option}</Option>;
-                })}
+                {options.map((option) => (
+                    <Option key={uuid()}>{option}</Option>
+                ))}
             </OptionContainer>
         </Container>
     );

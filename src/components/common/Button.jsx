@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 import { typography } from '../../configurations/Typography';
-import { color } from '../../configurations/Color';
 
-const MainContainer = styled.button`
+const Basic = styled.button`
     ${({ $labelColor, $backgroundColor }) => `
         width: 100%;
         background-color: ${$backgroundColor};
@@ -15,67 +14,50 @@ const MainContainer = styled.button`
     `}
 `;
 
-const SubContainer = styled.p`
-    ${({ $labelColor }) => `
+const Other = styled.p`
+    ${({ $category, $labelColor }) => `
         width: max-content;
-        ${typography.body2};
         color: ${$labelColor};
-        text-decoration: underline;
-        margin: 0 auto;
         cursor: pointer;
 
-        &:hover {
-            font-weight: 700;
-        }
+        ${
+            $category === 'sub' &&
+            `
+                ${typography.body2};
+                text-decoration: underline;
+                margin: 0 auto;
+
+                &:hover {
+                    font-weight: 700;
+                }
+            `
+        };
+
+        ${$category === 'back' && `${typography.title1};`};
+
+        ${
+            $category === 'close' &&
+            `
+                position: absolute;
+                top: 30px;
+                right: 30px;
+                ${typography.title1};
+            `
+        };
     `}
 `;
 
-const BackContainer = styled.p`
-    ${({ $labelColor }) => `
-        width: max-content;
-        ${typography.title1};
-        color: ${$labelColor};
-        cursor: pointer;
-    `}
-`;
-
-const CloseContainer = styled.p`
-    ${({ $labelColor }) => `
-        width: max-content;
-        position: absolute;
-        top: 30px;
-        right: 30px;
-        ${typography.title1};
-        color: ${$labelColor};
-        cursor: pointer;
-    `}
-`;
-
-export default function Button({ category = 'main', labelColor = color.white, backgroundColor = color.black, label, handleClick }) {
+export default function Button({ category, labelColor, backgroundColor, label, handleClick }) {
     return (
         <>
-            {category === 'main' && (
-                <MainContainer type="button" $labelColor={labelColor} $backgroundColor={backgroundColor} onClick={handleClick}>
+            {category === 'basic' ? (
+                <Basic type="button" $labelColor={labelColor} $backgroundColor={backgroundColor} onClick={handleClick}>
                     {label}
-                </MainContainer>
-            )}
-
-            {category === 'sub' && (
-                <SubContainer $labelColor={labelColor} onClick={handleClick}>
+                </Basic>
+            ) : (
+                <Other $category={category} $labelColor={labelColor} onClick={handleClick}>
                     {label}
-                </SubContainer>
-            )}
-
-            {category === 'back' && (
-                <BackContainer $labelColor={labelColor} onClick={handleClick}>
-                    {label}
-                </BackContainer>
-            )}
-
-            {category === 'close' && (
-                <CloseContainer $labelColor={labelColor} onClick={handleClick}>
-                    {label}
-                </CloseContainer>
+                </Other>
             )}
         </>
     );

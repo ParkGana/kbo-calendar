@@ -32,6 +32,6 @@ const Wrap = styled.div`
     `}
 `;
 
-export default function ContentLayout({ category = 'basic', children }) {
+export default function ContentLayout({ category, children }) {
     return <Wrap $category={category}>{children}</Wrap>;
 }

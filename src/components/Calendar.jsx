@@ -104,28 +104,24 @@ export default function Calendar({ handleOpenRead, handleOpenCreate }) {
                 <Arrow>▶</Arrow>
             </HeadContainer>
             <BodyContainer>
-                {['월', '화', '수', '목', '금', '토', '일'].map((day) => {
-                    return (
-                        <Day key={uuid()} $isSaturday={day === '토'} $isSunday={day === '일'}>
-                            {day}
-                        </Day>
-                    );
-                })}
-                {ScheduleData.map((schedule, index) => {
-                    return (
-                        <DateContainer key={uuid()}>
-                            <Date $isSaturday={index % 7 === 5} $isSunday={index % 7 === 6}>
-                                {schedule.date}
-                            </Date>
-                            {schedule.date && <Plus onClick={handleOpenCreate}>+</Plus>}
-                            {schedule.korean_name && (
-                                <Opponent $backgroundColor={color[schedule.english_name]} onClick={handleOpenRead}>
-                                    {schedule.korean_name.split(' ')[0]}
-                                </Opponent>
-                            )}
-                        </DateContainer>
-                    );
-                })}
+                {['월', '화', '수', '목', '금', '토', '일'].map((day) => (
+                    <Day key={uuid()} $isSaturday={day === '토'} $isSunday={day === '일'}>
+                        {day}
+                    </Day>
+                ))}
+                {ScheduleData.map((schedule, index) => (
+                    <DateContainer key={uuid()}>
+                        <Date $isSaturday={index % 7 === 5} $isSunday={index % 7 === 6}>
+                            {schedule.date}
+                        </Date>
+                        {schedule.date && <Plus onClick={handleOpenCreate}>+</Plus>}
+                        {schedule.korean_name && (
+                            <Opponent $backgroundColor={color[schedule.english_name]} onClick={handleOpenRead}>
+                                {schedule.korean_name.split(' ')[0]}
+                            </Opponent>
+                        )}
+                    </DateContainer>
+                ))}
             </BodyContainer>
         </Container>
     );

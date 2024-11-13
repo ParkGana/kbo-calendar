@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Home from './pages/Home';
-import User from './pages/User';
+import Profile from './pages/Profile';
 
 export default function Router() {
     return (
@@ -10,7 +10,7 @@ export default function Router() {
             <Routes>
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="/signup" element={<SignUp />} />
-                <Route path="/user" element={<User />} />
+                <Route path="/profile" element={<Profile />} />
                 <Route path="/" element={<Home />} />
             </Routes>
         </BrowserRouter>

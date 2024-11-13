@@ -72,22 +72,20 @@ export default function Record() {
         <Container>
             {RecordData.sort((a, b) => b.draw - a.draw)
                 .sort((a, b) => b.win - a.win)
-                .map((record) => {
-                    return (
-                        <TeamContainer key={uuid()}>
-                            <Team src={`src/assets/${record.english_name}.png`} alt="image" />
-                            <PercentContainer>
-                                <Percent $count={record.win}>
-                                    <Result>{record.win}승</Result>
-                                </Percent>
-                                <Percent $count={record.draw}></Percent>
-                                <Percent $count={record.lose}>
-                                    <Result>{record.lose}패</Result>
-                                </Percent>
-                            </PercentContainer>
-                        </TeamContainer>
-                    );
-                })}
+                .map((record) => (
+                    <TeamContainer key={uuid()}>
+                        <Team src={`src/assets/${record.english_name}.png`} alt="image" />
+                        <PercentContainer>
+                            <Percent $count={record.win}>
+                                <Result>{record.win}승</Result>
+                            </Percent>
+                            <Percent $count={record.draw}></Percent>
+                            <Percent $count={record.lose}>
+                                <Result>{record.lose}패</Result>
+                            </Percent>
+                        </PercentContainer>
+                    </TeamContainer>
+                ))}
         </Container>
     );
 }

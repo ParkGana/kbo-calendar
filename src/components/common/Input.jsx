@@ -16,7 +16,7 @@ const Container = styled.input`
         };
 
         ${
-            $category.includes('modal') &&
+            ($category === 'info' || $category === 'score') &&
             `
                 width: 100%;
                 border: none;
@@ -28,6 +28,10 @@ const Container = styled.input`
             `
         };
 
+        ${$category === 'info' && `${typography.title3};`};
+
+        ${$category === 'score' && `${typography.headline1};`};
+
         &::placeholder {
             color: ${color.gray};
         }
@@ -38,6 +42,6 @@ const Container = styled.input`
     `}
 `;
 
-export default function Input({ type = 'text', category = 'auth', placeholder, value, handleChange }) {
-    return <Container type={type} $category={category} placeholder={placeholder} value={value} onChange={handleChange} />;
+export default function Input({ category, type, placeholder, value, handleChange }) {
+    return <Container $category={category} type={type} placeholder={placeholder} value={value} onChange={handleChange} />;
 }

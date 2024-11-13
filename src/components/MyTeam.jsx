@@ -16,12 +16,12 @@ const Image = styled.img`
     `}
 `;
 
-export default function Team() {
+export default function MyTeam() {
     return (
         <Container>
-            {TeamData.map((team) => {
-                return <Image key={uuid()} src={`src/assets/${team.english_name}.png`} alt="image" $isMy={team.english_name === 'lotte'} />;
-            })}
+            {TeamData.map((team) => (
+                <Image key={uuid()} src={`src/assets/${team.english_name}.png`} alt="image" $isMy={team.english_name === 'lotte'} />
+            ))}
         </Container>
     );
 }
