@@ -6,6 +6,7 @@ const MainContainer = styled.button`
     ${({ $labelColor, $backgroundColor }) => `
         width: 100%;
         background-color: ${$backgroundColor};
+        border: none;
         border-radius: 4px;
         ${typography.title3};
         color: ${$labelColor};
@@ -31,6 +32,19 @@ const SubContainer = styled.p`
 
 const BackContainer = styled.p`
     ${({ $labelColor }) => `
+        width: max-content;
+        ${typography.title1};
+        color: ${$labelColor};
+        cursor: pointer;
+    `}
+`;
+
+const CloseContainer = styled.p`
+    ${({ $labelColor }) => `
+        width: max-content;
+        position: absolute;
+        top: 30px;
+        right: 30px;
         ${typography.title1};
         color: ${$labelColor};
         cursor: pointer;
@@ -56,6 +70,12 @@ export default function Button({ category = 'main', labelColor = color.white, ba
                 <BackContainer $labelColor={labelColor} onClick={handleClick}>
                     {label}
                 </BackContainer>
+            )}
+
+            {category === 'close' && (
+                <CloseContainer $labelColor={labelColor} onClick={handleClick}>
+                    {label}
+                </CloseContainer>
             )}
         </>
     );

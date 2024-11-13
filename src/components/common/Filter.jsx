@@ -10,19 +10,39 @@ const Container = styled.div`
 `;
 
 const Option = styled.p`
-    ${({ $isSelected }) => `
+    ${({ $category, $isSelected }) => `
         ${typography.title3};
-        color: ${$isSelected ? color.black : color.gray};
         cursor: pointer;
+
+        ${
+            $category === 'page' &&
+            `
+                color: ${$isSelected ? color.black : color.gray};
+            `
+        };
+
+        ${
+            $category === 'modal' &&
+            `
+                width: 50%;
+                background-color: ${$isSelected ? color.black : color.white};
+                border: 1px solid ${$isSelected ? color.white : color.black};
+                border-radius: 4px;
+                ${typography.title3};
+                color: ${$isSelected ? color.white : color.black};
+                text-align: center;
+                padding: 10px;
+            `
+        };
     `}
 `;
 
-export default function Filter({ options }) {
+export default function Filter({ category = 'page', options }) {
     return (
         <Container>
             {options.map((option) => {
                 return (
-                    <Option key={uuid()} $isSelected={option.isSelected} onClick={option.handleClick}>
+                    <Option key={uuid()} $category={category} $isSelected={option.isSelected} onClick={option.handleClick}>
                         {option.label}
                     </Option>
                 );

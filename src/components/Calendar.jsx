@@ -44,16 +44,35 @@ const Day = styled.div`
     `}
 `;
 
+const Plus = styled.p`
+    position: absolute;
+    top: 0;
+    right: 5px;
+    display: none;
+    ${typography.body1};
+    color: ${color.gray};
+    cursor: pointer;
+
+    &:hover {
+        ${typography.title3};
+    }
+`;
+
 const DateContainer = styled.div`
     height: calc((100vh - 330px) / 6);
     min-height: 60px;
     max-height: 120px;
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 5px;
     background-color: ${color.white};
     outline: 1px solid ${color.gray};
     padding: 5px 10px;
+
+    &:hover ${Plus} {
+        display: block;
+    }
 `;
 
 const Date = styled.p`
@@ -72,10 +91,11 @@ const Opponent = styled.p`
         color: ${color.white};
         text-align: center;
         padding: 4px 0;
+        cursor: pointer;
     `}
 `;
 
-export default function Calendar() {
+export default function Calendar({ handleOpenRead, handleOpenCreate }) {
     return (
         <Container>
             <HeadContainer>
@@ -97,7 +117,12 @@ export default function Calendar() {
                             <Date $isSaturday={index % 7 === 5} $isSunday={index % 7 === 6}>
                                 {schedule.date}
                             </Date>
-                            <Opponent $backgroundColor={color[schedule.english_name]}>{schedule.korean_name && schedule.korean_name.split(' ')[0]}</Opponent>
+                            {schedule.date && <Plus onClick={handleOpenCreate}>+</Plus>}
+                            {schedule.korean_name && (
+                                <Opponent $backgroundColor={color[schedule.english_name]} onClick={handleOpenRead}>
+                                    {schedule.korean_name.split(' ')[0]}
+                                </Opponent>
+                            )}
                         </DateContainer>
                     );
                 })}

@@ -20,7 +20,7 @@ export default function Team() {
     return (
         <Container>
             {TeamData.map((team) => {
-                return <Image key={uuid()} src={`src/assets/${team.english_name}.png`} $isMy={team.english_name === 'lotte'} />;
+                return <Image key={uuid()} src={`src/assets/${team.english_name}.png`} alt="image" $isMy={team.english_name === 'lotte'} />;
             })}
         </Container>
     );
