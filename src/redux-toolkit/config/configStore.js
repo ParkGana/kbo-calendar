@@ -1,7 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
+import schedule from '../slices/scheduleSlice';
 
 const store = configureStore({
-    reducer: {}
+    reducer: {
+        schedule
+    }
 });
 
 export default store;

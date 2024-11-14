@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import { typography } from '../configurations/Typography';
 import { color } from '../configurations/Color';
-import { ScheduleData } from '../Data';
 import { v4 as uuid } from 'uuid';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchDates, moveMonth } from '../redux-toolkit/slices/scheduleSlice';
 
 const Container = styled.div`
     display: flex;
@@ -96,12 +98,36 @@ const Opponent = styled.p`
 `;
 
 export default function Calendar({ handleOpenRead, handleOpenCreate }) {
+    const dispatch = useDispatch();
+
+    const { dates } = useSelector((state) => state.schedule);
+
+    useEffect(() => {
+        dispatch(fetchDates({ year: dates.year, month: dates.month }));
+    }, [dispatch, dates.year, dates.month]);
+
+    /* 이전 달로 이동 */
+    const handleMovePrev = () => {
+        const year = dates.month === 1 ? dates.year - 1 : dates.year;
+        const month = dates.month === 1 ? 12 : dates.month - 1;
+
+        dispatch(moveMonth({ year, month }));
+    };
+
+    /* 다음 달로 이동 */
+    const handleMoveNext = () => {
+        const year = dates.month === 12 ? dates.year + 1 : dates.year;
+        const month = dates.month === 12 ? 1 : dates.month + 1;
+
+        dispatch(moveMonth({ year, month }));
+    };
+
     return (
         <Container>
             <HeadContainer>
-                <Arrow>◀</Arrow>
-                <Month>9월</Month>
-                <Arrow>▶</Arrow>
+                <Arrow onClick={handleMovePrev}>◀</Arrow>
+                <Month>{dates.month.toString().padStart(2, '0')}월</Month>
+                <Arrow onClick={handleMoveNext}>▶</Arrow>
             </HeadContainer>
             <BodyContainer>
                 {['월', '화', '수', '목', '금', '토', '일'].map((day) => (
@@ -109,17 +135,17 @@ export default function Calendar({ handleOpenRead, handleOpenCreate }) {
                         {day}
                     </Day>
                 ))}
-                {ScheduleData.map((schedule, index) => (
+                {dates.days.map((day, index) => (
                     <DateContainer key={uuid()}>
                         <Date $isSaturday={index % 7 === 5} $isSunday={index % 7 === 6}>
-                            {schedule.date}
+                            {day}
                         </Date>
-                        {schedule.date && <Plus onClick={handleOpenCreate}>+</Plus>}
-                        {schedule.korean_name && (
+                        {day && <Plus onClick={handleOpenCreate}>+</Plus>}
+                        {/* {schedule.korean_name && (
                             <Opponent $backgroundColor={color[schedule.english_name]} onClick={handleOpenRead}>
                                 {schedule.korean_name.split(' ')[0]}
                             </Opponent>
-                        )}
+                        )} */}
                     </DateContainer>
                 ))}
             </BodyContainer>
