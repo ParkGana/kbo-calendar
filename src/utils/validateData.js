@@ -21,3 +21,17 @@ export const validateSignUp = ({ data, afterValidate }) => {
 
     text ? fireWarningSwal(text) : afterValidate();
 };
+
+/* 로그인 유효성 검사 */
+export const validateSignIn = ({ data, afterValidate }) => {
+    const { email, password } = data;
+
+    let text = '';
+
+    // 특정 값이 입력되지 않은 경우
+    if (!email || !password) {
+        text = '입력되지 않은 값이 존재합니다.';
+    }
+
+    text ? fireWarningSwal(text) : afterValidate();
+};

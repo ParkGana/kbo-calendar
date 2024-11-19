@@ -40,3 +40,13 @@ export const createUser = async ({ auth, name, teamId }) => {
         throw error;
     }
 };
+
+/* 로그인 */
+export const login = async ({ email, password }) => {
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+    if (error) {
+        fireErrorSwal('일치하는 정보가 존재하지 않습니다.');
+        throw error;
+    }
+};
