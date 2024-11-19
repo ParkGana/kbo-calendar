@@ -50,8 +50,8 @@ const Other = styled.p`
 export default function Button({ category, labelColor, backgroundColor, label, handleClick }) {
     return (
         <>
-            {category === 'basic' ? (
-                <Basic type="button" $labelColor={labelColor} $backgroundColor={backgroundColor} onClick={handleClick}>
+            {category === 'basic' || category === 'form' ? (
+                <Basic type={category === 'form' ? 'submit' : 'button'} $labelColor={labelColor} $backgroundColor={backgroundColor} onClick={handleClick}>
                     {label}
                 </Basic>
             ) : (

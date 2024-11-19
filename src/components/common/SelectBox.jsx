@@ -16,8 +16,10 @@ const Container = styled.div`
 `;
 
 const Selected = styled.p`
-    ${typography.body1};
-    color: ${color.gray};
+    ${({ $selected }) => `
+        ${typography.body1};
+        color: ${$selected ? color.black : color.gray};
+    `}
 `;
 
 const Arrow = styled.p`
@@ -50,14 +52,16 @@ const Option = styled.div`
     }
 `;
 
-export default function SelectBox({ placeholder, value, options, isOpen, handleToggle }) {
+export default function SelectBox({ placeholder, selected, options, isOpen, handleToggle, handleSelect }) {
     return (
         <Container onClick={handleToggle}>
-            <Selected>{value ?? placeholder}</Selected>
+            <Selected $selected={!!selected}>{selected ?? placeholder}</Selected>
             <Arrow>{isOpen ? '▲' : '▼'}</Arrow>
             <OptionContainer $isOpen={isOpen}>
                 {options.map((option) => (
-                    <Option key={uuid()}>{option}</Option>
+                    <Option key={uuid()} onClick={() => handleSelect(option)}>
+                        {option.value}
+                    </Option>
                 ))}
             </OptionContainer>
         </Container>

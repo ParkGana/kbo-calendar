@@ -42,6 +42,6 @@ const Container = styled.input`
     `}
 `;
 
-export default function Input({ category, type, placeholder, value, handleChange }) {
-    return <Container $category={category} type={type} placeholder={placeholder} value={value} onChange={handleChange} />;
+export default function Input({ category, type, name, placeholder, value, handleChange }) {
+    return <Container $category={category} type={type} name={name} placeholder={placeholder} value={value} onChange={handleChange} />;
 }
