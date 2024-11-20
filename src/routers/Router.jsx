@@ -16,7 +16,13 @@ const router = createBrowserRouter([
             return { teams: formatTeamsForSelectBox(await fetchTeams()) };
         }
     },
-    { path: '/profile', element: <Profile /> },
+    {
+        path: '/profile',
+        element: <Profile />,
+        loader: async () => {
+            return { teams: await fetchTeams() };
+        }
+    },
     { path: '/', element: <Home /> }
 ]);
 

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import { TeamData } from '../Data';
 import { v4 as uuid } from 'uuid';
+import { useAuth } from '../contexts/AuthContext';
+import { useLoaderData } from 'react-router-dom';
 
 const Container = styled.div`
     display: grid;
@@ -17,11 +18,8 @@ const Image = styled.img`
 `;
 
 export default function MyTeam() {
-    return (
-        <Container>
-            {TeamData.map((team) => (
-                <Image key={uuid()} src={`src/assets/${team.english_name}.png`} alt="image" $isMy={team.english_name === 'lotte'} />
-            ))}
-        </Container>
-    );
+    const { user } = useAuth();
+    const { teams } = useLoaderData();
+
+    return <Container>{user && teams.map((team) => <Image key={uuid()} src={`src/assets/${team.name_english}.png`} alt="image" $isMy={team.id === user.teams.id} />)}</Container>;
 }

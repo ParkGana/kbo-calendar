@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { typography } from '../configurations/Typography';
 import { color } from '../configurations/Color';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 const Container = styled.div`
     ${({ $category }) => `
@@ -57,21 +58,27 @@ const Image = styled.div`
 export default function User({ category }) {
     const navigate = useNavigate();
 
+    const { user } = useAuth();
+
     return (
         <>
-            {category === 'simple' && (
-                <Container $category={category} onClick={() => navigate('/profile')}>
-                    <Name $category={category}>박가나</Name>
-                    <Image $category={category} />
-                </Container>
-            )}
+            {user && (
+                <>
+                    {category === 'simple' && (
+                        <Container $category={category} onClick={() => navigate('/profile')}>
+                            <Name $category={category}>{user.name}</Name>
+                            <Image $category={category} />
+                        </Container>
+                    )}
 
-            {category === 'detail' && (
-                <Container $category={category}>
-                    <Image $category={category} />
-                    <Description>롯데 자이언츠의 승리 요정</Description>
-                    <Name $category={category}>박가나</Name>
-                </Container>
+                    {category === 'detail' && (
+                        <Container $category={category}>
+                            <Image $category={category} />
+                            <Description>{user.teams.name_korean}의 승리 요정</Description>
+                            <Name $category={category}>{user.name}</Name>
+                        </Container>
+                    )}
+                </>
             )}
         </>
     );
