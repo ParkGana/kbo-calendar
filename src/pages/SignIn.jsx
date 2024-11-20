@@ -8,8 +8,8 @@ import Input from '../components/common/Input';
 import Button from '../components/common/Button';
 import { useState } from 'react';
 import { validateSignIn } from '../utils/validateData';
-import { login } from '../services/supabase';
 import { fireSuccessSwal } from '../utils/fireSwal';
+import { useAuth } from '../contexts/AuthContext';
 
 const Title = styled.p`
     ${typography.headline1};
@@ -27,6 +27,8 @@ const Form = styled.form`
 export default function SignIn() {
     const navigate = useNavigate();
 
+    const { login } = useAuth();
+
     const [formData, setFormData] = useState({ email: '', password: '' });
 
     /* 입력 값 변경 이벤트 */
@@ -38,7 +40,7 @@ export default function SignIn() {
         });
     };
 
-    /* 회원가입 */
+    /* 로그인 */
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -47,8 +49,7 @@ export default function SignIn() {
         validateSignIn({
             data: formData,
             afterValidate: async () => {
-                await login({ email, password });
-
+                login({ email, password });
                 fireSuccessSwal({ text: '로그인을 성공하였습니다.', afterConfirm: () => navigate('/') });
             }
         });

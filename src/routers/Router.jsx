@@ -1,10 +1,11 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
-import Home from './pages/Home';
-import Profile from './pages/Profile';
-import { fetchTeams } from './services/supabase';
-import { formatTeamsForSelectBox } from './utils/formatData';
+import SignIn from '../pages/SignIn';
+import SignUp from '../pages/SignUp';
+import Home from '../pages/Home';
+import Profile from '../pages/Profile';
+import { fetchTeams } from '../services/supabase';
+import { formatTeamsForSelectBox } from '../utils/formatData';
+import { AuthProvider } from '../contexts/AuthContext';
 
 const router = createBrowserRouter([
     { path: '/signin', element: <SignIn /> },
@@ -20,5 +21,9 @@ const router = createBrowserRouter([
 ]);
 
 export default function Router() {
-    return <RouterProvider router={router} />;
+    return (
+        <AuthProvider>
+            <RouterProvider router={router} />;
+        </AuthProvider>
+    );
 }
