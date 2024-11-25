@@ -8,7 +8,7 @@ import Input from '../components/common/Input';
 import Button from '../components/common/Button';
 import SelectBox from '../components/common/SelectBox';
 import { useState } from 'react';
-import { createAuthUser, createUser } from '../services/supabase';
+import { createAuthUser, createUser } from '../api/Auth';
 import { fireSuccessSwal } from '../utils/fireSwal';
 import { validateSignUp } from '../utils/validateData';
 

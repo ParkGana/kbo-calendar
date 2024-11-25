@@ -3,7 +3,7 @@ import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import Home from '../pages/Home';
 import Profile from '../pages/Profile';
-import { fetchTeams } from '../services/supabase';
+import { fetchTeams } from '../api/Auth';
 import { formatTeamsForSelectBox } from '../utils/formatData';
 import { AuthProvider } from '../contexts/AuthContext';
 import NonAuthenticatedRoute from './NonAuthenticatedRoute';
@@ -41,7 +41,7 @@ const router = createBrowserRouter([
 export default function Router() {
     return (
         <AuthProvider>
-            <RouterProvider router={router} />;
+            <RouterProvider router={router} />
         </AuthProvider>
     );
 }

@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { fetchSession, fetchUser, signin, signout } from '../services/supabase';
+import { fetchSession, fetchUser, signin, signout } from '../api/Auth';
 
 const AuthContext = createContext();
 
