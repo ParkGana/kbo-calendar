@@ -2,9 +2,8 @@ import styled from 'styled-components';
 import { typography } from '../configurations/Typography';
 import { color } from '../configurations/Color';
 import { v4 as uuid } from 'uuid';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { fetchDates, moveMonth } from '../redux-toolkit/slices/scheduleSlice';
+import { useEffect, useState } from 'react';
+import { fetchCalendar } from '../utils/fetchData';
 
 const Container = styled.div`
     display: flex;
@@ -97,36 +96,39 @@ const Opponent = styled.p`
     `}
 `;
 
-export default function Calendar({ handleOpenRead, handleOpenCreate }) {
-    const dispatch = useDispatch();
+const today = new window.Date();
 
-    const { dates } = useSelector((state) => state.schedule);
+export default function Calendar({ handleOpenRead, handleOpenCreate }) {
+    const [year, setYear] = useState(today.getFullYear());
+    const [month, setMonth] = useState(today.getMonth() + 1);
+    const [days, setDays] = useState([]);
 
     useEffect(() => {
-        dispatch(fetchDates({ year: dates.year, month: dates.month }));
-    }, [dispatch, dates.year, dates.month]);
+        const fetchCalendarData = async () => {
+            const dates = await fetchCalendar({ year, month });
+            setDays(dates);
+        };
+
+        fetchCalendarData();
+    }, [year, month]);
 
     /* 이전 달로 이동 */
     const handleMovePrev = () => {
-        const year = dates.month === 1 ? dates.year - 1 : dates.year;
-        const month = dates.month === 1 ? 12 : dates.month - 1;
-
-        dispatch(moveMonth({ year, month }));
+        setYear(month === 1 ? year - 1 : year);
+        setMonth(month === 1 ? 12 : month - 1);
     };
 
     /* 다음 달로 이동 */
     const handleMoveNext = () => {
-        const year = dates.month === 12 ? dates.year + 1 : dates.year;
-        const month = dates.month === 12 ? 1 : dates.month + 1;
-
-        dispatch(moveMonth({ year, month }));
+        setYear(month === 12 ? year + 1 : year);
+        setMonth(month === 12 ? 1 : month + 1);
     };
 
     return (
         <Container>
             <HeadContainer>
                 <Arrow onClick={handleMovePrev}>◀</Arrow>
-                <Month>{dates.month.toString().padStart(2, '0')}월</Month>
+                <Month>{month.toString().padStart(2, '0')}월</Month>
                 <Arrow onClick={handleMoveNext}>▶</Arrow>
             </HeadContainer>
             <BodyContainer>
@@ -135,7 +137,7 @@ export default function Calendar({ handleOpenRead, handleOpenCreate }) {
                         {day}
                     </Day>
                 ))}
-                {dates.days.map((day, index) => (
+                {days.map((day, index) => (
                     <DateContainer key={uuid()}>
                         <Date $isSaturday={index % 7 === 5} $isSunday={index % 7 === 6}>
                             {day}
