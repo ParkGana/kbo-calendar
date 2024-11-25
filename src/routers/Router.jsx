@@ -6,24 +6,36 @@ import Profile from '../pages/Profile';
 import { fetchTeams } from '../services/supabase';
 import { formatTeamsForSelectBox } from '../utils/formatData';
 import { AuthProvider } from '../contexts/AuthContext';
+import NonAuthenticatedRoute from './NonAuthenticatedRoute';
+import AuthenticatedRoute from './AuthenticatedRoute';
 
 const router = createBrowserRouter([
-    { path: '/signin', element: <SignIn /> },
     {
-        path: '/signup',
-        element: <SignUp />,
-        loader: async () => {
-            return { teams: formatTeamsForSelectBox(await fetchTeams()) };
-        }
+        element: <NonAuthenticatedRoute />,
+        children: [
+            { path: '/signin', element: <SignIn /> },
+            {
+                path: '/signup',
+                element: <SignUp />,
+                loader: async () => {
+                    return { teams: formatTeamsForSelectBox(await fetchTeams()) };
+                }
+            }
+        ]
     },
     {
-        path: '/profile',
-        element: <Profile />,
-        loader: async () => {
-            return { teams: await fetchTeams() };
-        }
-    },
-    { path: '/', element: <Home /> }
+        element: <AuthenticatedRoute />,
+        children: [
+            { path: '/', element: <Home /> },
+            {
+                path: '/profile',
+                element: <Profile />,
+                loader: async () => {
+                    return { teams: await fetchTeams() };
+                }
+            }
+        ]
+    }
 ]);
 
 export default function Router() {

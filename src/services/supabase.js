@@ -71,3 +71,10 @@ export const fetchUser = async () => {
 
     return error ? null : data;
 };
+
+/* session 데이터 가져오기 */
+export const fetchSession = async () => {
+    const { data, error } = await supabase.auth.getSession();
+
+    return error ? null : data.session.access_token;
+};
