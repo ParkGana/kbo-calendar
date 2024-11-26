@@ -4,6 +4,8 @@ import { color } from '../configurations/Color';
 import { v4 as uuid } from 'uuid';
 import { useEffect, useState } from 'react';
 import { fetchCalendar } from '../utils/fetchData';
+import { useAuth } from '../contexts/AuthContext';
+import { fetchSchedulesAPI } from '../api/Schedule';
 
 const Container = styled.div`
     display: flex;
@@ -101,16 +103,20 @@ const today = new window.Date();
 export default function Calendar({ handleOpenRead, handleOpenCreate }) {
     const [year, setYear] = useState(today.getFullYear());
     const [month, setMonth] = useState(today.getMonth() + 1);
-    const [days, setDays] = useState([]);
+    const [calendarData, setCalendarData] = useState([]);
+
+    const { user } = useAuth();
 
     useEffect(() => {
         const fetchCalendarData = async () => {
-            const dates = await fetchCalendar({ year, month });
-            setDays(dates);
+            const schedules = await fetchSchedulesAPI({ user, year, month });
+            const dates = await fetchCalendar({ user, year, month, schedules });
+
+            setCalendarData(dates);
         };
 
         fetchCalendarData();
-    }, [year, month]);
+    }, [user, year, month]);
 
     /* 이전 달로 이동 */
     const handleMovePrev = () => {
@@ -137,17 +143,17 @@ export default function Calendar({ handleOpenRead, handleOpenCreate }) {
                         {day}
                     </Day>
                 ))}
-                {days.map((day, index) => (
+                {calendarData.map(({ day, opponent }, index) => (
                     <DateContainer key={uuid()}>
                         <Date $isSaturday={index % 7 === 5} $isSunday={index % 7 === 6}>
                             {day}
                         </Date>
                         {day && <Plus onClick={handleOpenCreate}>+</Plus>}
-                        {/* {schedule.korean_name && (
-                            <Opponent $backgroundColor={color[schedule.english_name]} onClick={handleOpenRead}>
-                                {schedule.korean_name.split(' ')[0]}
+                        {opponent && (
+                            <Opponent $backgroundColor={color[opponent.name_english]} onClick={handleOpenRead}>
+                                {opponent.name_korean.split(' ')[0]}
                             </Opponent>
-                        )} */}
+                        )}
                     </DateContainer>
                 ))}
             </BodyContainer>

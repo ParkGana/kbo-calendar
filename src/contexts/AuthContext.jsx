@@ -15,14 +15,13 @@ export function AuthProvider({ children }) {
         };
 
         fetchSignedUser();
-    }, []);
+    }, [isAuthenticated]);
 
     /* 로그인 */
     const login = async ({ email, password }) => {
         await signin({ email, password });
         localStorage.setItem('accessToken', await fetchSession());
         setIsAuthenticated(true);
-        setUser(await fetchUser());
     };
 
     /* 로그아웃 */
@@ -30,7 +29,6 @@ export function AuthProvider({ children }) {
         await signout();
         localStorage.removeItem('accessToken');
         setIsAuthenticated(false);
-        setUser(null);
     };
 
     return <AuthContext.Provider value={{ isAuthenticated, user, login, logout }}>{children}</AuthContext.Provider>;
