@@ -3,7 +3,7 @@ import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import Home from '../pages/Home';
 import Profile from '../pages/Profile';
-import { fetchTeams } from '../api/Auth';
+import { fetchTeamsAPI } from '../api/Schedule';
 import { formatTeamsForSelectBox } from '../utils/formatData';
 import { AuthProvider } from '../contexts/AuthContext';
 import NonAuthenticatedRoute from './NonAuthenticatedRoute';
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
                 path: '/signup',
                 element: <SignUp />,
                 loader: async () => {
-                    return { teams: formatTeamsForSelectBox(await fetchTeams()) };
+                    return { teams: formatTeamsForSelectBox(await fetchTeamsAPI()) };
                 }
             }
         ]
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
                 path: '/profile',
                 element: <Profile />,
                 loader: async () => {
-                    return { teams: await fetchTeams() };
+                    return { teams: await fetchTeamsAPI() };
                 }
             }
         ]

@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { fetchSession, fetchUser, signin, signout } from '../api/Auth';
+import { fetchSessionAPI, fetchUserAPI, signinAPI, signoutAPI } from '../api/Auth';
 
 const AuthContext = createContext();
 
@@ -11,7 +11,7 @@ export function AuthProvider({ children }) {
 
     useEffect(() => {
         const fetchSignedUser = async () => {
-            setUser(await fetchUser());
+            setUser(await fetchUserAPI());
         };
 
         fetchSignedUser();
@@ -19,14 +19,14 @@ export function AuthProvider({ children }) {
 
     /* 로그인 */
     const login = async ({ email, password }) => {
-        await signin({ email, password });
-        localStorage.setItem('accessToken', await fetchSession());
+        await signinAPI({ email, password });
+        localStorage.setItem('accessToken', await fetchSessionAPI());
         setIsAuthenticated(true);
     };
 
     /* 로그아웃 */
     const logout = async () => {
-        await signout();
+        await signoutAPI();
         localStorage.removeItem('accessToken');
         setIsAuthenticated(false);
     };

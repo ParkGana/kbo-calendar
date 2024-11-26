@@ -8,7 +8,7 @@ import Input from '../components/common/Input';
 import Button from '../components/common/Button';
 import SelectBox from '../components/common/SelectBox';
 import { useState } from 'react';
-import { createAuthUser, createUser } from '../api/Auth';
+import { createAuthUserAPI, createUserAPI } from '../api/Auth';
 import { fireSuccessSwal } from '../utils/fireSwal';
 import { validateSignUp } from '../utils/validateData';
 
@@ -58,9 +58,9 @@ export default function SignUp() {
         validateSignUp({
             data: formData,
             afterValidate: async () => {
-                const authUser = await createAuthUser({ email, password });
+                const authUser = await createAuthUserAPI({ email, password });
 
-                await createUser({ auth: authUser, name, teamId: team.id });
+                await createUserAPI({ auth: authUser, name, teamId: team.id });
 
                 fireSuccessSwal({ text: '회원가입을 성공하였습니다.', afterConfirm: () => navigate('/signin') });
             }

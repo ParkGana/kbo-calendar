@@ -13,8 +13,7 @@ export const fetchCalendar = async ({ user, year, month, schedules }) => {
 
     for (let schedule of schedules) {
         const index = dates.findIndex((date) => date.day === schedule.day);
-
-        const opponent = user.teams.id === schedule.team_home_id ? schedule.team_away : schedule.team_home;
+        const opponent = user.team.id === schedule.team_home_id ? schedule.team_away : schedule.team_home;
 
         dates[index].opponent = opponent;
     }
