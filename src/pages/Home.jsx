@@ -6,12 +6,9 @@ import SpaceBetween from '../components/alignment/SpaceBetween';
 import { useState } from 'react';
 import Record from '../components/Record';
 import User from '../components/User';
-import Modal from '../components/Modal';
 
 export default function Home() {
     const [pageContent, setPageContent] = useState('일정');
-    const [modalContent, setModalContent] = useState();
-    const [isOpenModal, setIsOpenModal] = useState(false);
 
     return (
         <PageLayout category="basic">
@@ -27,23 +24,10 @@ export default function Home() {
                     <User category="simple" />
                 </SpaceBetween>
 
-                {pageContent === '일정' && (
-                    <Calendar
-                        handleOpenRead={() => {
-                            setModalContent('read');
-                            setIsOpenModal(true);
-                        }}
-                        handleOpenCreate={() => {
-                            setModalContent('create');
-                            setIsOpenModal(true);
-                        }}
-                    />
-                )}
+                {pageContent === '일정' && <Calendar />}
 
                 {pageContent === '시즌 전적' && <Record />}
             </ContentLayout>
-
-            <Modal category={modalContent} isOpen={isOpenModal} handleClose={() => setIsOpenModal(false)} handleUpdate={() => setModalContent('update')} />
         </PageLayout>
     );
 }

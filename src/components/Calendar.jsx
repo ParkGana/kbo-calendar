@@ -6,6 +6,9 @@ import { useEffect, useState } from 'react';
 import { fetchCalendar } from '../utils/fetchData';
 import { useAuth } from '../contexts/AuthContext';
 import { fetchSchedulesAPI } from '../api/Schedule';
+import ReadModal from './ReadModal';
+import CreateModal from './CreateModal';
+import UpdateModal from './UpdateModal';
 
 const Container = styled.div`
     display: flex;
@@ -100,10 +103,14 @@ const Opponent = styled.p`
 
 const today = new window.Date();
 
-export default function Calendar({ handleOpenRead, handleOpenCreate }) {
+export default function Calendar() {
     const [year, setYear] = useState(today.getFullYear());
     const [month, setMonth] = useState(today.getMonth() + 1);
     const [calendarData, setCalendarData] = useState([]);
+
+    const [isOpenReadModal, setIsOpenReadModal] = useState(false);
+    const [isOpenCreateModal, setIsOpenCreateModal] = useState(false);
+    const [isOpenUpdateModal, setIsOpenUpdateModal] = useState(false);
 
     const { user } = useAuth();
 
@@ -148,15 +155,26 @@ export default function Calendar({ handleOpenRead, handleOpenCreate }) {
                         <Date $isSaturday={index % 7 === 5} $isSunday={index % 7 === 6}>
                             {day}
                         </Date>
-                        {day && <Plus onClick={handleOpenCreate}>+</Plus>}
+                        {day && <Plus onClick={() => setIsOpenCreateModal(true)}>+</Plus>}
                         {opponent && (
-                            <Opponent $backgroundColor={color[opponent.name_english]} onClick={handleOpenRead}>
+                            <Opponent $backgroundColor={color[opponent.name_english]} onClick={() => setIsOpenReadModal(true)}>
                                 {opponent.name_korean.split(' ')[0]}
                             </Opponent>
                         )}
                     </DateContainer>
                 ))}
             </BodyContainer>
+
+            <ReadModal
+                isOpen={isOpenReadModal}
+                handleClose={() => setIsOpenReadModal(false)}
+                handleUpdate={() => {
+                    setIsOpenReadModal(false);
+                    setIsOpenUpdateModal(true);
+                }}
+            />
+            <CreateModal isOpen={isOpenCreateModal} handleClose={() => setIsOpenCreateModal(false)} />
+            <UpdateModal isOpen={isOpenUpdateModal} handleClose={() => setIsOpenUpdateModal(false)} />
         </Container>
     );
 }
