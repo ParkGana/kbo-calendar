@@ -9,6 +9,9 @@ import { fetchSchedulesAPI } from '../api/Schedule';
 import ReadModal from './ReadModal';
 import CreateModal from './CreateModal';
 import UpdateModal from './UpdateModal';
+import { useReadModal } from '../hooks/useReadModal';
+import { useCreateModal } from '../hooks/useCreateModal';
+import { useUpdateModal } from '../hooks/useUpdateModal';
 
 const Container = styled.div`
     display: flex;
@@ -104,13 +107,13 @@ const Opponent = styled.p`
 const today = new window.Date();
 
 export default function Calendar() {
+    const { isOpen: isOpenReadModal, openModal: openReadModal, closeModal: closeReadModal } = useReadModal();
+    const { isOpen: isOpenCreateModal, openModal: openCreateModal, closeModal: closeCreateModal } = useCreateModal();
+    const { isOpen: isOpenUpdateModal, openModal: openUpdateModal, closeModal: closeUpdateModal } = useUpdateModal();
+
     const [year, setYear] = useState(today.getFullYear());
     const [month, setMonth] = useState(today.getMonth() + 1);
     const [calendarData, setCalendarData] = useState([]);
-
-    const [isOpenReadModal, setIsOpenReadModal] = useState(false);
-    const [isOpenCreateModal, setIsOpenCreateModal] = useState(false);
-    const [isOpenUpdateModal, setIsOpenUpdateModal] = useState(false);
 
     const { user } = useAuth();
 
@@ -155,9 +158,9 @@ export default function Calendar() {
                         <Date $isSaturday={index % 7 === 5} $isSunday={index % 7 === 6}>
                             {day}
                         </Date>
-                        {day && <Plus onClick={() => setIsOpenCreateModal(true)}>+</Plus>}
+                        {day && <Plus onClick={openCreateModal}>+</Plus>}
                         {opponent && (
-                            <Opponent $backgroundColor={color[opponent.name_english]} onClick={() => setIsOpenReadModal(true)}>
+                            <Opponent $backgroundColor={color[opponent.name_english]} onClick={openReadModal}>
                                 {opponent.name_korean.split(' ')[0]}
                             </Opponent>
                         )}
@@ -167,14 +170,14 @@ export default function Calendar() {
 
             <ReadModal
                 isOpen={isOpenReadModal}
-                handleClose={() => setIsOpenReadModal(false)}
+                handleClose={closeReadModal}
                 handleUpdate={() => {
-                    setIsOpenReadModal(false);
-                    setIsOpenUpdateModal(true);
+                    closeReadModal();
+                    openUpdateModal();
                 }}
             />
-            <CreateModal isOpen={isOpenCreateModal} handleClose={() => setIsOpenCreateModal(false)} />
-            <UpdateModal isOpen={isOpenUpdateModal} handleClose={() => setIsOpenUpdateModal(false)} />
+            <CreateModal isOpen={isOpenCreateModal} handleClose={closeCreateModal} />
+            <UpdateModal isOpen={isOpenUpdateModal} handleClose={closeUpdateModal} />
         </Container>
     );
 }
