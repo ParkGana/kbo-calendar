@@ -4,7 +4,7 @@ export const fetchCalendar = async ({ user, year, month, schedules }) => {
     const lastDate = new Date(year, month, 0).getDate();
 
     const dates = Array.from({ length: 42 }, () => {
-        return { day: null, opponent: null };
+        return { day: null, scheduleId: null, opponent: null };
     });
 
     for (let i = firstDay; i < firstDay + lastDate; i++) {
@@ -15,6 +15,7 @@ export const fetchCalendar = async ({ user, year, month, schedules }) => {
         const index = dates.findIndex((date) => date.day === schedule.day);
         const opponent = user.team.id === schedule.team_home_id ? schedule.team_away : schedule.team_home;
 
+        dates[index].scheduleId = schedule.id;
         dates[index].opponent = opponent;
     }
 
