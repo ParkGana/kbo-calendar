@@ -21,5 +21,5 @@ export default function MyTeam() {
     const { user } = useAuth();
     const { teams } = useLoaderData();
 
-    return <Container>{user && teams.map((team) => <Image key={uuid()} src={`src/assets/${team.name_english}.png`} alt="image" $isMy={team.id === user.teams.id} />)}</Container>;
+    return <Container>{user && teams.map((team) => <Image key={uuid()} src={`src/assets/${team.name_english}.png`} alt="image" $isMy={team.id === user.team.id} />)}</Container>;
 }

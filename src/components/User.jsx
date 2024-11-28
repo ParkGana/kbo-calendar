@@ -74,7 +74,7 @@ export default function User({ category }) {
                     {category === 'detail' && (
                         <Container $category={category}>
                             <Image $category={category} />
-                            <Description>{user.teams.name_korean}의 승리 요정</Description>
+                            <Description>{user.team.name_korean}의 승리 요정</Description>
                             <Name $category={category}>{user.name}</Name>
                         </Container>
                     )}
