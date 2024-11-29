@@ -15,8 +15,8 @@ export const createAuthUserAPI = async ({ email, password }) => {
 };
 
 /* user 데이터 생성하기 (회원가입) */
-export const createUserAPI = async ({ auth, name, teamId }) => {
-    const { error } = await supabase.from('users').insert({ id: auth.id, name, team_id: teamId }).single();
+export const createUserAPI = async ({ auth, name, team }) => {
+    const { error } = await supabase.from('users').insert({ id: auth.id, name, team_id: team.id }).single();
 
     if (error) {
         fireErrorSwal('회원가입을 실패하였습니다.');

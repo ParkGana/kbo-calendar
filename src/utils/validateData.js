@@ -16,7 +16,7 @@ export const validateSignUp = ({ data, afterValidate }) => {
     }
     // select box에 값이 선택되지 않은 경우
     else if (!team) {
-        text = '선택되지 않은 값이 존재합니다.';
+        text = '응원하는 구단을 선택해 주세요.';
     }
 
     text ? fireWarningSwal(text) : afterValidate();

@@ -4,7 +4,6 @@ import SignUp from '../pages/SignUp';
 import Home from '../pages/Home';
 import Profile from '../pages/Profile';
 import { fetchTeamsAPI } from '../api/Schedule';
-import { formatTeamsForSelectBox } from '../utils/formatData';
 import { AuthProvider } from '../contexts/AuthContext';
 import NonAuthenticatedRoute from './NonAuthenticatedRoute';
 import AuthenticatedRoute from './AuthenticatedRoute';
@@ -18,7 +17,7 @@ const router = createBrowserRouter([
                 path: '/signup',
                 element: <SignUp />,
                 loader: async () => {
-                    return { teams: formatTeamsForSelectBox(await fetchTeamsAPI()) };
+                    return { teams: await fetchTeamsAPI() };
                 }
             }
         ]
@@ -26,7 +25,13 @@ const router = createBrowserRouter([
     {
         element: <AuthenticatedRoute />,
         children: [
-            { path: '/', element: <Home /> },
+            {
+                path: '/',
+                element: <Home />,
+                loader: async () => {
+                    return { teams: await fetchTeamsAPI() };
+                }
+            },
             {
                 path: '/profile',
                 element: <Profile />,
