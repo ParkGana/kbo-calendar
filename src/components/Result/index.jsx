@@ -1,20 +1,20 @@
 import { Info, InfoContainer, ScoreContainer, Score, Team, TeamContainer, Container } from './style';
 
-export default function Result() {
+export default function Result({ data }) {
     return (
         <Container>
             <TeamContainer>
-                <Team src="src/assets/hanwha.png" alt="image" />
+                <Team src={`src/assets/${data.team_away.name_english}.png`} alt="image" />
                 <InfoContainer>
-                    <Info>사직</Info>
-                    <Info>18:30</Info>
+                    <Info>{data.stadium.name}</Info>
+                    <Info>{data.time}</Info>
                 </InfoContainer>
-                <Team src="src/assets/lotte.png" alt="image" />
+                <Team src={`src/assets/${data.team_home.name_english}.png`} alt="image" />
             </TeamContainer>
             <ScoreContainer>
-                <Score>5</Score>
+                <Score>{data.score_away}</Score>
                 <Score>:</Score>
-                <Score>7</Score>
+                <Score>{data.score_home}</Score>
             </ScoreContainer>
         </Container>
     );

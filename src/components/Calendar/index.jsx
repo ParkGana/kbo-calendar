@@ -15,7 +15,7 @@ import UpdateModal from '../UpdateModal';
 const today = new window.Date();
 
 export default function Calendar() {
-    const { isOpen: isOpenReadModal, openModal: openReadModal, closeModal: closeReadModal } = useReadModal();
+    const { isOpen: isOpenReadModal, data: readData, openModal: openReadModal, closeModal: closeReadModal } = useReadModal();
     const { isOpen: isOpenCreateModal, openModal: openCreateModal, closeModal: closeCreateModal } = useCreateModal();
     const { isOpen: isOpenUpdateModal, openModal: openUpdateModal, closeModal: closeUpdateModal } = useUpdateModal();
 
@@ -61,14 +61,14 @@ export default function Calendar() {
                         {day}
                     </Day>
                 ))}
-                {calendarData.map(({ day, opponent }, index) => (
+                {calendarData.map(({ day, scheduleId, opponent }, index) => (
                     <DateContainer key={uuid()}>
                         <Date $isSaturday={index % 7 === 5} $isSunday={index % 7 === 6}>
                             {day}
                         </Date>
                         {day && <Plus onClick={openCreateModal}>+</Plus>}
                         {opponent && (
-                            <Opponent $backgroundColor={color[opponent.name_english]} onClick={openReadModal}>
+                            <Opponent $backgroundColor={color[opponent.name_english]} onClick={() => openReadModal(scheduleId)}>
                                 {opponent.name_korean.split(' ')[0]}
                             </Opponent>
                         )}
@@ -76,14 +76,17 @@ export default function Calendar() {
                 ))}
             </BodyContainer>
 
-            <ReadModal
-                isOpen={isOpenReadModal}
-                handleClose={closeReadModal}
-                handleUpdate={() => {
-                    closeReadModal();
-                    openUpdateModal();
-                }}
-            />
+            {readData && (
+                <ReadModal
+                    isOpen={isOpenReadModal}
+                    data={readData}
+                    handleClose={closeReadModal}
+                    handleUpdate={() => {
+                        closeReadModal();
+                        openUpdateModal();
+                    }}
+                />
+            )}
             <CreateModal isOpen={isOpenCreateModal} handleClose={closeCreateModal} />
             <UpdateModal isOpen={isOpenUpdateModal} handleClose={closeUpdateModal} />
         </Container>
