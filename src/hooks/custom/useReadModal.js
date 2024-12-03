@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { fetchScheduleAPI } from '../api/Schedule';
+import { fetchScheduleAPI } from '../../api/Schedule';
 
 export function useReadModal() {
     const [isOpen, setIsOpen] = useState(false);

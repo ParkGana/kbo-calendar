@@ -2,7 +2,7 @@ import { Background, Container, Description } from './style';
 import ResultForm from '../ResultForm';
 import Button from '../Button';
 import TeamForm from '../TeamForm';
-import { useForm } from '../../hooks/useForm';
+import { useForm } from '../../hooks/custom/useForm';
 import { createScheduleAPI } from '../../api/Schedule';
 
 export default function CreateModal({ isOpen, year, month, day, handleClose }) {

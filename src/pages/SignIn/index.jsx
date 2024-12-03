@@ -3,7 +3,7 @@ import { validateSignIn } from '../../utils/validateData';
 import { fireSuccessSwal } from '../../utils/fireSwal';
 import { useAuth } from '../../contexts/AuthContext';
 import { Container, Title, Wrap } from './style';
-import { useForm } from '../../hooks/useForm';
+import { useForm } from '../../hooks/custom/useForm';
 import AuthForm from '../../components/AuthForm';
 import Button from '../../components/Button';
 

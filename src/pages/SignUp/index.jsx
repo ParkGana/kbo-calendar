@@ -4,7 +4,7 @@ import { fireSuccessSwal } from '../../utils/fireSwal';
 import { validateSignUp } from '../../utils/validateData';
 import { Container, Title, Wrap } from './style';
 import AuthForm from '../../components/AuthForm';
-import { useForm } from '../../hooks/useForm';
+import { useForm } from '../../hooks/custom/useForm';
 import Button from '../../components/Button';
 
 export default function SignUp() {
