@@ -1,23 +1,21 @@
-import Button from '../Button';
-import { Form, Info, InfoContainer, Input, Result, ResultContainer, Team, TeamContainer } from './style';
+import { Info, InfoContainer, Input, Result, ResultContainer, Team, TeamContainer } from './style';
 
-export default function ResultForm({ label, handleChange, handleSubmit }) {
+export default function ResultForm({ values, handleChange }) {
     return (
-        <Form onSubmit={handleSubmit}>
+        <>
             <TeamContainer>
-                <Team src="src/assets/hanwha.png" alt="image" />
+                <Team src={`src/assets/${values?.team_away?.name_english}.png`} alt="image" />
                 <InfoContainer>
-                    <Info>사직</Info>
-                    <Input $category="time" type="text" name="time" autoComplete="off" value="18:30" onChange={handleChange} />
+                    <Info>{values?.stadium?.name}</Info>
+                    <Input $category="time" type="text" name="time" autoComplete="off" value={values?.time} onChange={handleChange} />
                 </InfoContainer>
-                <Team src="src/assets/lotte.png" alt="image" />
+                <Team src={`src/assets/${values?.team_home?.name_english}.png`} alt="image" />
             </TeamContainer>
             <ResultContainer>
-                <Input $category="score" type="number" name="score_away" autoComplete="off" value="5" onChange={handleChange} />
+                <Input $category="score" type="number" name="score_away" autoComplete="off" value={values?.score_away} onChange={handleChange} />
                 <Result>:</Result>
-                <Input $category="score" type="number" name="score_home" autoComplete="off" value="7" onChange={handleChange} />
+                <Input $category="score" type="number" name="score_home" autoComplete="off" value={values?.score_home} onChange={handleChange} />
             </ResultContainer>
-            <Button category="form" label={label} />
-        </Form>
+        </>
     );
 }

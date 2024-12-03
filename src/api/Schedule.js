@@ -3,7 +3,7 @@ import { fireErrorSwal } from '../utils/fireSwal';
 
 /* teams 데이터 가져오기 */
 export const fetchTeamsAPI = async () => {
-    const { data, error } = await supabase.from('teams').select('*').order('name_english');
+    const { data, error } = await supabase.from('teams').select('*, stadium:stadiums(*)').order('name_english');
 
     if (error) {
         fireErrorSwal('구단 정보를 가져오지 못했습니다.');
@@ -35,4 +35,9 @@ export const fetchScheduleAPI = async (scheduleId) => {
     }
 
     return data;
+};
+
+/* schedule 추가 */
+export const createScheduleAPI = async (data) => {
+    console.log(data);
 };

@@ -2,12 +2,6 @@ import styled from 'styled-components';
 import { color } from '../../configurations/Color';
 import { typography } from '../../configurations/Typography';
 
-export const Form = styled.form`
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-`;
-
 export const TeamContainer = styled.div`
     display: grid;
     grid-template-columns: 140px 80px 140px;

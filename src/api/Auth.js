@@ -50,7 +50,7 @@ export const fetchUserAPI = async () => {
 
     if (authError) return null;
 
-    const { data, error } = await supabase.from('users').select('*, team: team_id(*)').eq('id', authData.user.id).single();
+    const { data, error } = await supabase.from('users').select('*, team: team_id(*, stadium:stadiums(*))').eq('id', authData.user.id).single();
 
     return error ? null : data;
 };

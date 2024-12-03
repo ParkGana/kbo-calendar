@@ -2,16 +2,25 @@ import styled from 'styled-components';
 import { typography } from '../../configurations/Typography';
 import { color } from '../../configurations/Color';
 
-export const Filter = styled.div`
+export const LocationRadio = styled.div`
     display: flex;
     align-items: center;
     gap: 10px;
 `;
 
+export const OpponentRadio = styled.div`
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+`;
+
+export const Label = styled.label`
+    width: 50%;
+`;
+
 export const Option = styled.p`
     ${({ $isSelected }) => `
         ${typography.title3};
-        width: 50%;
         background-color: ${$isSelected ? color.black : color.white};
         border: 1px solid ${$isSelected ? color.white : color.black};
         border-radius: 4px;
@@ -20,12 +29,6 @@ export const Option = styled.p`
         padding: 10px;
         cursor: pointer;
     `}
-`;
-
-export const Opponent = styled.div`
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
 `;
 
 export const Image = styled.img`
@@ -41,4 +44,8 @@ export const Image = styled.img`
             `
         };
     `}
+`;
+
+export const HiddenInput = styled.input`
+    display: none;
 `;

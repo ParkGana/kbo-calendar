@@ -17,7 +17,7 @@ export const Background = styled.div`
     `}
 `;
 
-export const Container = styled.div`
+export const Container = styled.form`
     position: relative;
     display: flex;
     flex-direction: column;
