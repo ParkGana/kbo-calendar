@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import useCalendarStore from '../../zustand/calendarStore';
-import { fetchSchedulesAPI } from '../../api/Schedule';
+import { createScheduleAPI, fetchSchedulesAPI } from '../../api/Schedule';
 import { useAuth } from '../../contexts/AuthContext';
 import { fetchCalendar } from '../../utils/fetchData';
 
@@ -34,5 +34,11 @@ export function useSchedules() {
         onSuccess: () => queryClient.invalidateQueries(['schedules'])
     });
 
-    return { data, moveToPrevMutation, moveToNextMutation };
+    /* schedule 생성 */
+    const createMutation = useMutation({
+        mutationFn: createScheduleAPI,
+        onSuccess: () => queryClient.invalidateQueries(['schedules'])
+    });
+
+    return { data, moveToPrevMutation, moveToNextMutation, createMutation };
 }

@@ -3,9 +3,17 @@ import ResultForm from '../ResultForm';
 import Button from '../Button';
 import TeamForm from '../TeamForm';
 import { useForm } from '../../hooks/custom/useForm';
-import { createScheduleAPI } from '../../api/Schedule';
+import useCalendarStore from '../../zustand/calendarStore';
+import { useAuth } from '../../contexts/AuthContext';
+import { useSchedules } from '../../hooks/tanstack/useSchedules';
 
-export default function CreateModal({ isOpen, year, month, day, handleClose }) {
+export default function CreateModal({ isOpen, handleClose }) {
+    const calendar = useCalendarStore((state) => state.calendar);
+
+    const { user } = useAuth();
+
+    const { createMutation } = useSchedules();
+
     const { values, handleChange, handleSelect, handleSelectMultiple, handleReset } = useForm({
         step: 1,
         location: '',
@@ -18,16 +26,17 @@ export default function CreateModal({ isOpen, year, month, day, handleClose }) {
         score_away: 0
     });
 
+    /* create 데이터 초기화 및 modal 창 닫기 */
     const handleResetAndClose = () => {
         handleReset();
         handleClose();
     };
 
+    /* schedule 생성 */
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        await createScheduleAPI({ year, month, day, ...values });
-
+        createMutation.mutate({ user, year: calendar.year, month: calendar.month, day: calendar.day, ...values });
         handleResetAndClose();
     };
 

@@ -39,5 +39,23 @@ export const fetchScheduleAPI = async (scheduleId) => {
 
 /* schedule 추가 */
 export const createScheduleAPI = async (data) => {
-    console.log(data);
+    const { user, year, month, day, time, score_home, score_away, team_home, team_away, stadium } = data;
+
+    const { error } = await supabase.from('schedules').insert({
+        year,
+        month,
+        day,
+        time,
+        score_home,
+        score_away,
+        team_home_id: team_home.id,
+        team_away_id: team_away.id,
+        stadium_id: stadium.id,
+        user_id: user.id
+    });
+
+    if (error) {
+        fireErrorSwal('경기 일정 생성을 실패하였습니다.');
+        throw error;
+    }
 };

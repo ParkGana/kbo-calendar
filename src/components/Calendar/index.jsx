@@ -12,12 +12,19 @@ import { useSchedules } from '../../hooks/tanstack/useSchedules';
 
 export default function Calendar() {
     const calendar = useCalendarStore((state) => state.calendar);
+    const selectDay = useCalendarStore((state) => state.selectDay);
 
     const { data: schedules, moveToPrevMutation, moveToNextMutation } = useSchedules();
 
     const { isOpen: isOpenReadModal, openModal: openReadModal, closeModal: closeReadModal } = useReadModal();
     const { isOpen: isOpenCreateModal, openModal: openCreateModal, closeModal: closeCreateModal } = useCreateModal();
     const { isOpen: isOpenUpdateModal, openModal: openUpdateModal, closeModal: closeUpdateModal } = useUpdateModal();
+
+    /* create Modal 열기 */
+    const handleOpenCreateModal = (day) => {
+        selectDay(day);
+        openCreateModal();
+    };
 
     /* update Modal 열기 */
     const handleOpenUpdateModal = () => {
@@ -43,7 +50,7 @@ export default function Calendar() {
                         <Date $isSaturday={index % 7 === 5} $isSunday={index % 7 === 6}>
                             {day}
                         </Date>
-                        {day && <Plus onClick={openCreateModal}>+</Plus>}
+                        {day && <Plus onClick={() => handleOpenCreateModal(day)}>+</Plus>}
                         {opponent && (
                             <Opponent $backgroundColor={color[opponent.name_english]} onClick={() => openReadModal(scheduleId)}>
                                 {opponent.name_korean.split(' ')[0]}
