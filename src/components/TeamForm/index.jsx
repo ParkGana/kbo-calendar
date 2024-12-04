@@ -1,10 +1,10 @@
 import { HiddenInput, Image, Label, LocationRadio, OpponentRadio, Option } from './style';
-import { useLoaderData } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import { useTeams } from '../../hooks/tanstack/useTeams';
 
 export default function TeamForm({ values, handleSelect, handleSelectMultiple }) {
     const { user } = useAuth();
-    const { teams } = useLoaderData();
+    const { data: teams } = useTeams();
 
     return (
         <>
@@ -20,7 +20,7 @@ export default function TeamForm({ values, handleSelect, handleSelectMultiple })
             </LocationRadio>
 
             <OpponentRadio>
-                {teams.map(
+                {teams?.map(
                     (team) =>
                         team.id !== user?.team.id && (
                             <Label key={team.id} htmlFor={team.id}>

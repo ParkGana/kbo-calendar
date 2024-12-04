@@ -1,13 +1,14 @@
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { Container, Description, Image, Name, Radio, Thumbnail, User, Wrap } from './style';
 import Button from '../../components/Button';
+import { useTeams } from '../../hooks/tanstack/useTeams';
 
 export default function Profile() {
     const navigate = useNavigate();
 
-    const { teams } = useLoaderData();
     const { user, logout } = useAuth();
+    const { data: teams } = useTeams();
 
     /* 로그아웃 */
     const handleSignOut = () => {
@@ -27,7 +28,7 @@ export default function Profile() {
             </Container>
             <Container>
                 <Radio>
-                    {teams.map((team) => (
+                    {teams?.map((team) => (
                         <Image key={team.id} $isMy={team.id === user?.team.id} src={`src/assets/${team.name_english}.png`} alt="image" />
                     ))}
                 </Radio>
