@@ -5,7 +5,6 @@ import useScheduleStore from '../../zustand/scheduleStore';
 import Button from '../Button';
 import ResultForm from '../ResultForm';
 import { Background, Container } from './style';
-import { fireSuccessSwal } from '../../utils/fireSwal';
 
 export default function UpdateModal({ isOpen, handleClose }) {
     const schedule = useScheduleStore((state) => state.schedule);
@@ -36,7 +35,7 @@ export default function UpdateModal({ isOpen, handleClose }) {
         e.preventDefault();
 
         updateMutation.mutate({ scheduleId: schedule.id, ...values });
-        fireSuccessSwal({ text: '경기 일정이 수정되었습니다.', afterConfirm: handleResetAndClose });
+        handleResetAndClose();
     };
 
     return (

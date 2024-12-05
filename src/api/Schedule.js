@@ -54,10 +54,7 @@ export const createScheduleAPI = async (data) => {
         user_id: user.id
     });
 
-    if (error) {
-        fireErrorSwal('경기 일정 생성을 실패하였습니다.');
-        throw error;
-    }
+    if (error) throw error;
 };
 
 /* schedule 수정 */
@@ -73,18 +70,12 @@ export const updateScheduleAPI = async (data) => {
         })
         .eq('id', scheduleId);
 
-    if (error) {
-        fireErrorSwal('경기 일정 수정을 실패하였습니다.');
-        throw error;
-    }
+    if (error) throw error;
 };
 
 /* schedule 삭제 */
 export const deleteScheduleAPI = async (scheduleId) => {
     const { error } = await supabase.from('schedules').delete().eq('id', scheduleId);
 
-    if (error) {
-        fireErrorSwal('경기 일정 삭제를 실패하였습니다.');
-        throw error;
-    }
+    if (error) throw error;
 };

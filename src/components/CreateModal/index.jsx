@@ -6,7 +6,6 @@ import { useForm } from '../../hooks/custom/useForm';
 import useCalendarStore from '../../zustand/calendarStore';
 import { useAuth } from '../../contexts/AuthContext';
 import { useSchedules } from '../../hooks/tanstack/useSchedules';
-import { fireSuccessSwal } from '../../utils/fireSwal';
 
 export default function CreateModal({ isOpen, handleClose }) {
     const calendar = useCalendarStore((state) => state.calendar);
@@ -38,7 +37,7 @@ export default function CreateModal({ isOpen, handleClose }) {
         e.preventDefault();
 
         createMutation.mutate({ user, year: calendar.year, month: calendar.month, day: calendar.day, ...values });
-        fireSuccessSwal({ text: '경기 일정이 등록되었습니다.', afterConfirm: handleResetAndClose });
+        handleResetAndClose();
     };
 
     return (

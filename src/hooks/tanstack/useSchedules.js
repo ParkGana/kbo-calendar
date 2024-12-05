@@ -3,6 +3,7 @@ import useCalendarStore from '../../zustand/calendarStore';
 import { createScheduleAPI, deleteScheduleAPI, fetchSchedulesAPI, updateScheduleAPI } from '../../api/Schedule';
 import { useAuth } from '../../contexts/AuthContext';
 import { fetchCalendar } from '../../utils/fetchData';
+import { fireErrorSwal } from '../../utils/fireSwal';
 
 export function useSchedules() {
     const queryClient = useQueryClient();
@@ -43,10 +44,14 @@ export function useSchedules() {
     /* schedule 생성 */
     const createMutation = useMutation({
         mutationFn: createScheduleAPI,
-        onSuccess: () =>
+        onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: ['schedules']
-            })
+            });
+        },
+        onError: () => {
+            fireErrorSwal('경기 일정 생성에 실패하였습니다.');
+        }
     });
 
     /* schedule 수정 */
@@ -56,6 +61,9 @@ export function useSchedules() {
             queryClient.invalidateQueries({
                 queryKey: ['schedules']
             });
+        },
+        onError: () => {
+            fireErrorSwal('경기 일정 수정에 실패하였습니다.');
         }
     });
 
@@ -66,6 +74,9 @@ export function useSchedules() {
             queryClient.invalidateQueries({
                 queryKey: ['schedules']
             });
+        },
+        onError: () => {
+            fireErrorSwal('경기 일정 삭제에 실패하였습니다.');
         }
     });
 
