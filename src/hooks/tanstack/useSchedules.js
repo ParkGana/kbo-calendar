@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import useCalendarStore from '../../zustand/calendarStore';
-import { createScheduleAPI, fetchSchedulesAPI } from '../../api/Schedule';
+import { createScheduleAPI, deleteScheduleAPI, fetchSchedulesAPI, updateScheduleAPI } from '../../api/Schedule';
 import { useAuth } from '../../contexts/AuthContext';
 import { fetchCalendar } from '../../utils/fetchData';
 
@@ -25,20 +25,49 @@ export function useSchedules() {
     /* 이전 달로 이동 */
     const moveToPrevMutation = useMutation({
         mutationFn: moveToPrev,
-        onSuccess: () => queryClient.invalidateQueries(['schedules'])
+        onSuccess: () =>
+            queryClient.invalidateQueries({
+                queryKey: ['schedules']
+            })
     });
 
     /* 다음 달로 이동 */
     const moveToNextMutation = useMutation({
         mutationFn: moveToNext,
-        onSuccess: () => queryClient.invalidateQueries(['schedules'])
+        onSuccess: () =>
+            queryClient.invalidateQueries({
+                queryKey: ['schedules']
+            })
     });
 
     /* schedule 생성 */
     const createMutation = useMutation({
         mutationFn: createScheduleAPI,
-        onSuccess: () => queryClient.invalidateQueries(['schedules'])
+        onSuccess: () =>
+            queryClient.invalidateQueries({
+                queryKey: ['schedules']
+            })
     });
 
-    return { data, moveToPrevMutation, moveToNextMutation, createMutation };
+    /* schedule 수정 */
+    const updateMutation = useMutation({
+        mutationFn: updateScheduleAPI,
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: ['schedules']
+            });
+        }
+    });
+
+    /* schedule 삭제 */
+    const deleteMutation = useMutation({
+        mutationFn: deleteScheduleAPI,
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: ['schedules']
+            });
+        }
+    });
+
+    return { data, moveToPrevMutation, moveToNextMutation, createMutation, updateMutation, deleteMutation };
 }

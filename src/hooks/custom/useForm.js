@@ -25,6 +25,7 @@ export function useForm(initialValues) {
 
     return {
         values,
+        setValues,
         handleChange,
         handleSelect,
         handleSelectMultiple,

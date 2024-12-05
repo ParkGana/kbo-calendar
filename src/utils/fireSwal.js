@@ -37,3 +37,21 @@ export const fireErrorSwal = (text) => {
         width: '400px'
     });
 };
+
+/* 확인 Swal */
+export const fireConfirmSwal = ({ text, afterConfirm }) => {
+    Swal.fire({
+        icon: 'question',
+        text,
+        showCancelButton: true,
+        confirmButtonText: '확인',
+        cancelButtonText: '취소',
+        confirmButtonColor: '#87adbd',
+        cancelButtonColor: '#636c74',
+        width: '400px'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            afterConfirm();
+        }
+    });
+};
