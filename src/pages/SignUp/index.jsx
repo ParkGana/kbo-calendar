@@ -1,11 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import { createAuthUserAPI, createUserAPI } from '../../api/Auth';
-import { fireSuccessSwal } from '../../utils/fireSwal';
+import { fireErrorSwal, fireSuccessSwal } from '../../utils/fireSwal';
 import { validateSignUp } from '../../utils/validateData';
 import { Container, Title, Wrap } from './style';
 import AuthForm from '../../components/AuthForm';
 import { useForm } from '../../hooks/custom/useForm';
 import Button from '../../components/Button';
+import { manageSignUpError } from '../../utils/manageError';
 
 export default function SignUp() {
     const navigate = useNavigate();
@@ -15,7 +16,7 @@ export default function SignUp() {
         password: '',
         passwordConfirm: '',
         name: '',
-        team: {}
+        team: null
     });
 
     /* 회원가입 */
@@ -27,9 +28,21 @@ export default function SignUp() {
         validateSignUp({
             data: values,
             afterValidate: async () => {
-                const authUser = await createAuthUserAPI({ email, password });
-                await createUserAPI({ auth: authUser, name, team });
-                fireSuccessSwal({ text: '회원가입을 성공하였습니다.', afterConfirm: () => navigate('/signin') });
+                const { user: authUser, error: authError } = await createAuthUserAPI({ email, password });
+
+                // auth user 데이터 생성 오류
+                if (authError) {
+                    fireErrorSwal(manageSignUpError(authError.message));
+                } else {
+                    const { error: signupError } = await createUserAPI({ auth: authUser, name, team });
+
+                    // user 데이터 생성 오류
+                    if (signupError) {
+                        fireErrorSwal('회원가입에 실패하였습니다.');
+                    } else {
+                        fireSuccessSwal({ text: '회원가입에 성공하였습니다.', afterConfirm: () => navigate('/signin') });
+                    }
+                }
             }
         });
     };

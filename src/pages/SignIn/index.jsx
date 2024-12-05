@@ -26,8 +26,11 @@ export default function SignIn() {
         validateSignIn({
             data: values,
             afterValidate: async () => {
-                login({ email, password });
-                fireSuccessSwal({ text: '로그인을 성공하였습니다.', afterConfirm: () => navigate('/') });
+                const { error } = await login({ email, password });
+
+                if (!error) {
+                    fireSuccessSwal({ text: '로그인에 성공하였습니다.', afterConfirm: () => navigate('/') });
+                }
             }
         });
     };

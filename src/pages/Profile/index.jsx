@@ -3,6 +3,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { Container, Description, Image, Name, Radio, Thumbnail, User, Wrap } from './style';
 import Button from '../../components/Button';
 import { useTeams } from '../../hooks/tanstack/useTeams';
+import { fireSuccessSwal } from '../../utils/fireSwal';
 
 export default function Profile() {
     const navigate = useNavigate();
@@ -11,9 +12,12 @@ export default function Profile() {
     const { data: teams } = useTeams();
 
     /* 로그아웃 */
-    const handleSignOut = () => {
-        logout();
-        navigate('/signin');
+    const handleSignOut = async () => {
+        const { error } = await logout();
+
+        if (!error) {
+            fireSuccessSwal({ text: '로그아웃에 성공하였습니다.', afterConfirm: () => navigate('/signin') });
+        }
     };
 
     return (
