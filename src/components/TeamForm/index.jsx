@@ -36,7 +36,8 @@ export default function TeamForm({ values, handleSelect, handleSelectMultiple })
                                             { name: 'opponent', selected: team },
                                             { name: 'team_home', selected: values.location === 'home' ? user.team : team },
                                             { name: 'team_away', selected: values.location === 'home' ? team : user.team },
-                                            { name: 'stadium', selected: values.location === 'home' ? user.team.stadium[0] : team.stadium[0] }
+                                            { name: 'stadiums', selected: values.location === 'home' ? user.team.stadium : team.stadium },
+                                            { name: 'stadium', selected: values.location === 'home' ? user.team.stadium[0] : team.stadium[0] },
                                         ])
                                     }
                                 />

@@ -20,6 +20,7 @@ export default function CreateModal({ isOpen, handleClose }) {
         opponent: null,
         team_home: null,
         team_away: null,
+        stadiums: [],
         stadium: null,
         time: '18:30',
         score_home: 0,
@@ -57,7 +58,7 @@ export default function CreateModal({ isOpen, handleClose }) {
 
                         {values.step === 2 && (
                             <>
-                                <ResultForm values={values} handleChange={handleChange} />
+                                <ResultForm values={values} handleChange={handleChange} handleSelect={handleSelect} />
                                 <Button category="form" label="등록 완료" />
                             </>
                         )}

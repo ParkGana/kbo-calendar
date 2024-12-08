@@ -5,15 +5,18 @@ import useScheduleStore from '../../zustand/scheduleStore';
 import Button from '../Button';
 import ResultForm from '../ResultForm';
 import { Background, Container } from './style';
+import { useTeams } from '../../hooks/tanstack/useTeams';
 
 export default function UpdateModal({ isOpen, handleClose }) {
     const schedule = useScheduleStore((state) => state.schedule);
 
+    const { data: teams } = useTeams();
     const { updateMutation } = useSchedules();
 
-    const { values, setValues, handleChange, handleReset } = useForm({
+    const { values, setValues, handleChange, handleSelect, handleReset } = useForm({
         team_home: null,
         team_away: null,
+        stadiums: [],
         stadium: null,
         time: '18:30',
         score_home: 0,
@@ -21,7 +24,10 @@ export default function UpdateModal({ isOpen, handleClose }) {
     });
 
     useEffect(() => {
-        setValues({ ...values, ...schedule });
+        if (schedule) {
+            const homeTeam = teams?.find((team) => team.id === schedule.team_home.id);
+            setValues({ ...values, ...schedule, stadiums: homeTeam?.stadium });
+        }
     }, [schedule]);
 
     /* update 데이터 초기화 및 modal 창 닫기 */
@@ -42,7 +48,7 @@ export default function UpdateModal({ isOpen, handleClose }) {
         <Background $isOpen={isOpen}>
             <Container onSubmit={handleSubmit}>
                 <Button category="close" label="✖" handleClick={handleClose} />
-                <ResultForm values={values} handleChange={handleChange} />
+                <ResultForm values={values} handleChange={handleChange} handleSelect={handleSelect} />
                 <Button category="form" label="수정 완료" />
             </Container>
         </Background>

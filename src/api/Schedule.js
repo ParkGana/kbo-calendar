@@ -71,14 +71,15 @@ export const createScheduleAPI = async (data) => {
 
 /* schedule 수정 */
 export const updateScheduleAPI = async (data) => {
-    const { scheduleId, time, score_home, score_away } = data;
+    const { scheduleId, stadium, time, score_home, score_away } = data;
 
     const { error } = await supabase
         .from('schedules')
         .update({
             time,
             score_home,
-            score_away
+            score_away,
+            stadium_id: stadium.id
         })
         .eq('id', scheduleId);
 

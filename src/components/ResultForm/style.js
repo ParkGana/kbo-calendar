@@ -25,6 +25,29 @@ export const Info = styled.p`
     text-align: center;
 `;
 
+export const Radio = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 10px;
+`;
+
+export const Label = styled.label`
+    width: 50px;
+`;
+
+export const Option = styled.p`
+    ${({ $isSelected }) => `
+        ${$isSelected ? typography.title3 : typography.body1};
+        color: ${$isSelected ? color.black : color.gray};
+        text-align: center;
+        cursor: pointer;
+    `}
+`;
+
+export const HiddenInput = styled.input`
+    display: none;
+`;
+
 export const ResultContainer = styled.div`
     display: grid;
     grid-template-columns: 140px 80px 140px;
