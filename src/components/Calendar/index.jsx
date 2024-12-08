@@ -48,17 +48,17 @@ export default function Calendar() {
                         {day}
                     </Day>
                 ))}
-                {schedules?.map(({ day, scheduleId, opponent }, index) => (
+                {schedules?.map(({ day, details }, index) => (
                     <DateContainer key={uuid()}>
                         <Date $isSaturday={index % 7 === 5} $isSunday={index % 7 === 6}>
                             {day}
                         </Date>
                         {day && <Plus onClick={() => handleOpenCreateModal(day)}>+</Plus>}
-                        {opponent && (
-                            <Opponent $backgroundColor={color[opponent.name_english]} onClick={() => openReadModal(scheduleId)}>
-                                {opponent.name_korean.split(' ')[0]}
+                        {details.map((detail) => (
+                            <Opponent key={detail.id} $backgroundColor={color[detail.opponent.name_english]} onClick={() => openReadModal(detail.id)}>
+                                {detail.opponent.name_korean.split(' ')[0]}
                             </Opponent>
-                        )}
+                        ))}
                     </DateContainer>
                 ))}
             </BodyContainer>
