@@ -25,7 +25,7 @@ export default function UpdateModal({ isOpen, handleClose }) {
 
     useEffect(() => {
         if (schedule) {
-            const homeTeam = teams?.find((team) => team.id === schedule.team_home.id);
+            const homeTeam = teams?.find((team) => team.id === schedule?.team_home?.id);
             setValues({ ...values, ...schedule, stadiums: homeTeam?.stadium });
         }
     }, [schedule]);
