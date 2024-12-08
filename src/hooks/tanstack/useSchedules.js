@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import useCalendarStore from '../../zustand/calendarStore';
-import { createScheduleAPI, deleteScheduleAPI, fetchSchedulesAPI, updateScheduleAPI } from '../../api/Schedule';
+import { createScheduleAPI, deleteScheduleAPI, fetchYearMonthSchedulesAPI, updateScheduleAPI } from '../../api/Schedule';
 import { useAuth } from '../../contexts/AuthContext';
 import { fetchCalendar } from '../../utils/fetchData';
 import { fireErrorSwal } from '../../utils/fireSwal';
@@ -10,14 +10,14 @@ export function useSchedules() {
 
     const { user } = useAuth();
     const calendar = useCalendarStore((state) => state.calendar);
-    const moveToPrev = useCalendarStore((state) => state.moveToPrev);
-    const moveToNext = useCalendarStore((state) => state.moveToNext);
+    const moveToPrevMonth = useCalendarStore((state) => state.moveToPrevMonth);
+    const moveToNextMonth = useCalendarStore((state) => state.moveToNextMonth);
 
     /* schedule 목록 가져오기 */
     const { data } = useQuery({
         queryKey: ['schedules'],
         queryFn: async () => {
-            const schedules = await fetchSchedulesAPI({ user, year: calendar.year, month: calendar.month });
+            const schedules = await fetchYearMonthSchedulesAPI({ user, year: calendar.year, month: calendar.month });
             const dates = await fetchCalendar({ user, year: calendar.year, month: calendar.month, schedules });
             return dates;
         }
@@ -25,7 +25,7 @@ export function useSchedules() {
 
     /* 이전 달로 이동 */
     const moveToPrevMutation = useMutation({
-        mutationFn: moveToPrev,
+        mutationFn: moveToPrevMonth,
         onSuccess: () =>
             queryClient.invalidateQueries({
                 queryKey: ['schedules']
@@ -34,7 +34,7 @@ export function useSchedules() {
 
     /* 다음 달로 이동 */
     const moveToNextMutation = useMutation({
-        mutationFn: moveToNext,
+        mutationFn: moveToNextMonth,
         onSuccess: () =>
             queryClient.invalidateQueries({
                 queryKey: ['schedules']

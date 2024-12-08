@@ -6,7 +6,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
 `;
 
 export const HeadContainer = styled.div`
@@ -21,8 +21,19 @@ export const Arrow = styled.p`
     cursor: pointer;
 `;
 
+export const NowContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+export const Year = styled.div`
+    ${typography.title3};
+    color: ${color.black};
+`;
+
 export const Month = styled.p`
-    ${typography.headline1};
+    ${typography.headline2};
     color: ${color.black};
 `;
 
@@ -57,7 +68,7 @@ export const Plus = styled.p`
 `;
 
 export const DateContainer = styled.div`
-    height: calc((100vh - 330px) / 6);
+    height: calc((100vh - 336px) / 6);
     min-height: 60px;
     max-height: 120px;
     position: relative;

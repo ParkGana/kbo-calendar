@@ -6,8 +6,24 @@ const useCalendarStore = create((set) => ({
         month: new Date().getMonth() + 1,
         day: 1
     },
+    /* 다음 년도로 이동 */
+    moveToPrevYear: () =>
+        set((state) => ({
+            calendar: {
+                ...state.calendar,
+                year: state.calendar.year - 1
+            }
+        })),
+    /* 이전 년도로 이동 */
+    moveToNextYear: () =>
+        set((state) => ({
+            calendar: {
+                ...state.calendar,
+                year: state.calendar.year + 1
+            }
+        })),
     /* 다음 달로 이동 */
-    moveToPrev: () =>
+    moveToPrevMonth: () =>
         set((state) => ({
             calendar: {
                 ...state.calendar,
@@ -16,7 +32,7 @@ const useCalendarStore = create((set) => ({
             }
         })),
     /* 이전 달로 이동 */
-    moveToNext: () =>
+    moveToNextMonth: () =>
         set((state) => ({
             calendar: {
                 ...state.calendar,

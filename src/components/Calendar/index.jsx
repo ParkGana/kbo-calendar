@@ -3,7 +3,7 @@ import { v4 as uuid } from 'uuid';
 import { useReadModal } from '../../hooks/custom/useReadModal';
 import { useCreateModal } from '../../hooks/custom/useCreateModal';
 import { useUpdateModal } from '../../hooks/custom/useUpdateModal';
-import { Arrow, BodyContainer, Container, Date, DateContainer, Day, HeadContainer, Month, Opponent, Plus } from './style';
+import { Arrow, BodyContainer, Container, Date, DateContainer, Day, HeadContainer, Month, NowContainer, Opponent, Plus, Year } from './style';
 import ReadModal from '../ReadModal';
 import CreateModal from '../CreateModal';
 import UpdateModal from '../UpdateModal';
@@ -36,7 +36,10 @@ export default function Calendar() {
         <Container>
             <HeadContainer>
                 <Arrow onClick={moveToPrevMutation.mutate}>◀</Arrow>
-                <Month>{calendar.month.toString().padStart(2, '0')}월</Month>
+                <NowContainer>
+                    <Year>{calendar.year}년</Year>
+                    <Month>{calendar.month.toString().padStart(2, '0')}월</Month>
+                </NowContainer>
                 <Arrow onClick={moveToNextMutation.mutate}>▶</Arrow>
             </HeadContainer>
             <BodyContainer>
