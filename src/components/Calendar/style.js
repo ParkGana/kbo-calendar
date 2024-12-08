@@ -69,7 +69,7 @@ export const Plus = styled.p`
 
 export const DateContainer = styled.div`
     height: calc((100vh - 336px) / 6);
-    min-height: 60px;
+    min-height: 90px;
     max-height: 120px;
     position: relative;
     display: flex;

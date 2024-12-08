@@ -49,8 +49,8 @@ export const TeamContainer = styled.div`
     width: calc(100vw - 180px);
     max-width: 1100px;
     height: calc((100vh - 390px) / 9);
-    min-height: 30px;
-    max-height: 50px;
+    min-height: 50px;
+    max-height: 60px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -59,8 +59,8 @@ export const TeamContainer = styled.div`
 
 export const Team = styled.img`
     height: calc((100vh - 390px) / 9);
-    min-height: 30px;
-    max-height: 50px;
+    min-height: 50px;
+    max-height: 60px;
 `;
 
 export const PercentContainer = styled.div`
