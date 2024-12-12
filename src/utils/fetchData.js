@@ -13,11 +13,12 @@ export const fetchCalendar = async ({ user, year, month, schedules }) => {
 
     for (let schedule of schedules) {
         const index = dates.findIndex((date) => date.day === schedule.day);
-        const opponent = user.team.id === schedule.team_home_id ? schedule.team_away : schedule.team_home;
+        const isHome = user.team.id === schedule.team_home_id;
 
         dates[index].details.push({
             id: schedule.id,
-            opponent
+            opponent: isHome ? schedule.team_away : schedule.team_home,
+            isWin: isHome ? schedule.score_home > schedule.score_away : schedule.score_away > schedule.score_home
         });
     }
 

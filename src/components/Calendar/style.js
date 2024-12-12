@@ -93,9 +93,10 @@ export const Date = styled.p`
 `;
 
 export const Opponent = styled.p`
-    ${({ $backgroundColor }) => `
+    ${({ $backgroundColor, $isWin }) => `
         width: 100%;
         background-color: ${$backgroundColor};
+        opacity: ${$isWin ? '1' : '0.4'};
         ${typography.body3};
         color: ${color.white};
         text-align: center;

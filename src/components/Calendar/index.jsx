@@ -55,7 +55,7 @@ export default function Calendar() {
                         </Date>
                         {day && <Plus onClick={() => handleOpenCreateModal(day)}>+</Plus>}
                         {details.map((detail) => (
-                            <Opponent key={detail.id} $backgroundColor={color[detail.opponent.name_english]} onClick={() => openReadModal(detail.id)}>
+                            <Opponent key={detail.id} $backgroundColor={detail.isWin ? color[detail.opponent.name_english] : color.gray} $isWin={detail.isWin} onClick={() => openReadModal(detail.id)}>
                                 {detail.opponent.name_korean.split(' ')[0]}
                             </Opponent>
                         ))}
