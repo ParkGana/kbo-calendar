@@ -6,7 +6,7 @@ import { useForm } from '../../hooks/custom/useForm';
 import useCalendarStore from '../../zustand/calendarStore';
 import { useAuth } from '../../contexts/AuthContext';
 import { useSchedules } from '../../hooks/tanstack/useSchedules';
-import { fireToast } from '../../utils/fireSwal';
+import { fireToast, fireWarningSwal } from '../../utils/fireSwal';
 
 export default function CreateModal({ isOpen, handleClose }) {
     const calendar = useCalendarStore((state) => state.calendar);
@@ -34,6 +34,17 @@ export default function CreateModal({ isOpen, handleClose }) {
         handleClose();
     };
 
+    /* create modal 창에서 다음 단계로 이동 */
+    const handleChangeStep = () => {
+        if (!values.location) {
+            fireWarningSwal('경기 장소를 선택해 주세요.');
+        } else if (!values.team_home || !values.team_away) {
+            fireWarningSwal('상대 팀을 선택해 주세요.');
+        } else {
+            handleSelect({ name: 'step', selected: 2 });
+        }
+    };
+
     /* schedule 생성 */
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -53,8 +64,8 @@ export default function CreateModal({ isOpen, handleClose }) {
                         {values.step === 1 && (
                             <>
                                 <Description>경기 장소와 상대 팀을 선택해 주세요.</Description>
-                                <TeamForm values={values} handleSelect={handleSelect} handleSelectMultiple={handleSelectMultiple} />
-                                <Button category="basic" label="다음" handleClick={() => handleSelect({ name: 'step', selected: 2 })} />
+                                <TeamForm values={values} handleSelectMultiple={handleSelectMultiple} />
+                                <Button category="basic" label="다음" handleClick={handleChangeStep} />
                             </>
                         )}
 
