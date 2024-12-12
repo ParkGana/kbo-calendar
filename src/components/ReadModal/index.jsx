@@ -1,5 +1,5 @@
 import { useSchedules } from '../../hooks/tanstack/useSchedules';
-import { fireConfirmSwal } from '../../utils/fireSwal';
+import { fireConfirmSwal, fireToast } from '../../utils/fireSwal';
 import useScheduleStore from '../../zustand/scheduleStore';
 import Button from '../Button';
 import Result from '../Result';
@@ -17,6 +17,7 @@ export default function ReadModal({ isOpen, handleClose, handleUpdate }) {
             afterConfirm: () => {
                 deleteMutation.mutate(schedule.id);
                 handleClose();
+                fireToast('성공적으로 삭제되었습니다.');
             }
         });
     };

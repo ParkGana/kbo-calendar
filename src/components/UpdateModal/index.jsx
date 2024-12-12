@@ -6,6 +6,7 @@ import Button from '../Button';
 import ResultForm from '../ResultForm';
 import { Background, Container } from './style';
 import { useTeams } from '../../hooks/tanstack/useTeams';
+import { fireToast } from '../../utils/fireSwal';
 
 export default function UpdateModal({ isOpen, handleClose }) {
     const schedule = useScheduleStore((state) => state.schedule);
@@ -42,6 +43,7 @@ export default function UpdateModal({ isOpen, handleClose }) {
 
         updateMutation.mutate({ scheduleId: schedule.id, ...values });
         handleResetAndClose();
+        fireToast('성공적으로 수정되었습니다.');
     };
 
     return (

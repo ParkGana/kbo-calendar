@@ -55,3 +55,22 @@ export const fireConfirmSwal = ({ text, afterConfirm }) => {
         }
     });
 };
+
+/* Toast */
+export const fireToast = (text) => {
+    Swal.fire({
+        toast: true,
+        text,
+        position: 'top',
+        icon: 'success',
+        iconColor: 'white',
+        background: '#a5dc86',
+        color: 'white',
+        customClass: {
+            popup: 'colored-toast'
+        },
+        timer: 2000,
+        showConfirmButton: false,
+        timerProgressBar: false
+    });
+};
