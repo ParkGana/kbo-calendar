@@ -4,7 +4,7 @@ export default function ResultForm({ values, handleChange, handleSelect }) {
     return (
         <>
             <TeamContainer>
-                <Team src={`src/assets/${values?.team_away?.name_english}.png`} alt="image" />
+                <Team src={`/${values?.team_away?.name_english}.png`} alt="image" />
                 <InfoContainer>
                     {values?.stadiums?.length > 1 ? (
                         <Radio>
@@ -28,7 +28,7 @@ export default function ResultForm({ values, handleChange, handleSelect }) {
 
                     <Input $category="time" type="text" name="time" autoComplete="off" value={values?.time} onChange={handleChange} />
                 </InfoContainer>
-                <Team src={`src/assets/${values?.team_home?.name_english}.png`} alt="image" />
+                <Team src={`/${values?.team_home?.name_english}.png`} alt="image" />
             </TeamContainer>
             <ResultContainer>
                 <Input $category="score" type="number" name="score_away" autoComplete="off" value={values?.score_away} onChange={handleChange} />

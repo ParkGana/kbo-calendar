@@ -52,7 +52,7 @@ export default function TeamForm({ values, handleSelectMultiple }) {
                     (team) =>
                         team.id !== user?.team.id && (
                             <Label key={team.id} htmlFor={team.id}>
-                                <Image $isSelected={values.opponent?.id === team.id} src={`src/assets/${team.name_english}.png`} alt="image" />
+                                <Image $isSelected={values.opponent?.id === team.id} src={`/${team.name_english}.png`} alt="image" />
                                 <HiddenInput type="radio" name="team" id={team.id} checked={values.opponent?.id === team.id} value={team.id} onChange={() => handleSelectOpponent(team)} />
                             </Label>
                         )

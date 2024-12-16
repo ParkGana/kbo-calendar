@@ -16,7 +16,7 @@ export default function AuthForm({ category, label, data, handleChange, handleSe
                     <Radio>
                         {teams?.map((team) => (
                             <Label key={team.id} htmlFor={team.id}>
-                                <Image $isSelected={data.team?.id === team.id} src={`src/assets/${team.name_english}.png`} alt="image" />
+                                <Image $isSelected={data.team?.id === team.id} src={`/${team.name_english}.png`} alt="image" />
                                 <HiddenInput
                                     type="radio"
                                     name="team"

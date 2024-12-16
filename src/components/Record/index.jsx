@@ -23,7 +23,7 @@ export default function Record() {
             <BodyContainer>
                 {records?.details.map((record) => (
                     <TeamContainer key={uuid()}>
-                        <Team src={`src/assets/${record.team.name_english}.png`} alt="image" />
+                        <Team src={`/${record.team.name_english}.png`} alt="image" />
                         <PercentContainer>
                             <Percent $total={record.win + record.draw + record.lose} $count={record.win}>
                                 {record.win > 0 && <Result>{record.win}승</Result>}
