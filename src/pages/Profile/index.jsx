@@ -33,7 +33,12 @@ export default function Profile() {
             <Container>
                 <Radio>
                     {teams?.map((team) => (
-                        <Image key={team.id} $isMy={team.id === user?.team.id} src={`/${team.name_english}.png`} alt="image" />
+                        <Image
+                            key={team.id}
+                            $isMy={team.id === user?.team.id}
+                            src={`/${team.name_english}.png`}
+                            alt="image"
+                        />
                     ))}
                 </Radio>
             </Container>

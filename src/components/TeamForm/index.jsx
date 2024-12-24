@@ -39,11 +39,25 @@ export default function TeamForm({ values, handleSelectMultiple }) {
             <LocationRadio>
                 <Label htmlFor="home">
                     <Option $isSelected={values.location === 'home'}>홈</Option>
-                    <HiddenInput type="radio" name="location" id="home" checked={values.location === 'home'} value="home" onChange={() => handleSelectLocation('home')} />
+                    <HiddenInput
+                        type="radio"
+                        name="location"
+                        id="home"
+                        checked={values.location === 'home'}
+                        value="home"
+                        onChange={() => handleSelectLocation('home')}
+                    />
                 </Label>
                 <Label htmlFor="away">
                     <Option $isSelected={values.location === 'away'}>원정</Option>
-                    <HiddenInput type="radio" name="location" id="away" checked={values.location === 'away'} value="away" onChange={() => handleSelectLocation('away')} />
+                    <HiddenInput
+                        type="radio"
+                        name="location"
+                        id="away"
+                        checked={values.location === 'away'}
+                        value="away"
+                        onChange={() => handleSelectLocation('away')}
+                    />
                 </Label>
             </LocationRadio>
 
@@ -52,8 +66,19 @@ export default function TeamForm({ values, handleSelectMultiple }) {
                     (team) =>
                         team.id !== user?.team.id && (
                             <Label key={team.id} htmlFor={team.id}>
-                                <Image $isSelected={values.opponent?.id === team.id} src={`/${team.name_english}.png`} alt="image" />
-                                <HiddenInput type="radio" name="team" id={team.id} checked={values.opponent?.id === team.id} value={team.id} onChange={() => handleSelectOpponent(team)} />
+                                <Image
+                                    $isSelected={values.opponent?.id === team.id}
+                                    src={`/${team.name_english}.png`}
+                                    alt="image"
+                                />
+                                <HiddenInput
+                                    type="radio"
+                                    name="team"
+                                    id={team.id}
+                                    checked={values.opponent?.id === team.id}
+                                    value={team.id}
+                                    onChange={() => handleSelectOpponent(team)}
+                                />
                             </Label>
                         )
                 )}

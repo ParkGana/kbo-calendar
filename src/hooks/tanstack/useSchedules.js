@@ -1,6 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import useCalendarStore from '../../zustand/calendarStore';
-import { createScheduleAPI, deleteScheduleAPI, fetchYearMonthSchedulesAPI, updateScheduleAPI } from '../../api/Schedule';
+import {
+    createScheduleAPI,
+    deleteScheduleAPI,
+    fetchYearMonthSchedulesAPI,
+    updateScheduleAPI
+} from '../../api/Schedule';
 import { useAuth } from '../../contexts/AuthContext';
 import { fetchCalendar } from '../../utils/fetchData';
 import { fireErrorSwal } from '../../utils/fireSwal';

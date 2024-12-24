@@ -39,7 +39,13 @@ export default function SignIn() {
         <Wrap>
             <Container>
                 <Title>KBO Calendar</Title>
-                <AuthForm category="signin" label="로그인" data={values} handleChange={handleChange} handleSubmit={handleSignIn} />
+                <AuthForm
+                    category="signin"
+                    label="로그인"
+                    data={values}
+                    handleChange={handleChange}
+                    handleSubmit={handleSignIn}
+                />
                 <Button category="sub" label="회원가입" handleClick={() => navigate('/signup')} />
             </Container>
         </Wrap>

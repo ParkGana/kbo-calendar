@@ -1,5 +1,18 @@
 import { v4 as uuid } from 'uuid';
-import { Arrow, BodyContainer, Container, HeadContainer, Percent, PercentContainer, Result, Team, TeamContainer, Total, Year, YearContainer } from './style';
+import {
+    Arrow,
+    BodyContainer,
+    Container,
+    HeadContainer,
+    Percent,
+    PercentContainer,
+    Result,
+    Team,
+    TeamContainer,
+    Total,
+    Year,
+    YearContainer
+} from './style';
 import { useRecords } from '../../hooks/tanstack/useRecords';
 import useCalendarStore from '../../zustand/calendarStore';
 
@@ -17,7 +30,8 @@ export default function Record() {
                     <Arrow onClick={moveToNextMutation.mutate}>▶</Arrow>
                 </YearContainer>
                 <Total>
-                    {records?.win + records?.draw + records?.lose}전 {records?.win}승 {records?.draw}무 {records?.lose}패
+                    {records?.win + records?.draw + records?.lose}전 {records?.win}승 {records?.draw}무 {records?.lose}
+                    패
                 </Total>
             </HeadContainer>
             <BodyContainer>

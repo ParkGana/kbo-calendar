@@ -3,7 +3,20 @@ import { v4 as uuid } from 'uuid';
 import { useReadModal } from '../../hooks/custom/useReadModal';
 import { useCreateModal } from '../../hooks/custom/useCreateModal';
 import { useUpdateModal } from '../../hooks/custom/useUpdateModal';
-import { Arrow, BodyContainer, Container, Date, DateContainer, Day, HeadContainer, Month, NowContainer, Opponent, Plus, Year } from './style';
+import {
+    Arrow,
+    BodyContainer,
+    Container,
+    Date,
+    DateContainer,
+    Day,
+    HeadContainer,
+    Month,
+    NowContainer,
+    Opponent,
+    Plus,
+    Year
+} from './style';
 import ReadModal from '../ReadModal';
 import CreateModal from '../CreateModal';
 import UpdateModal from '../UpdateModal';
@@ -55,7 +68,12 @@ export default function Calendar() {
                         </Date>
                         {day && <Plus onClick={() => handleOpenCreateModal(day)}>+</Plus>}
                         {details.map((detail) => (
-                            <Opponent key={detail.id} $backgroundColor={detail.isWin ? color[detail.opponent.name_english] : color.gray} $isWin={detail.isWin} onClick={() => openReadModal(detail.id)}>
+                            <Opponent
+                                key={detail.id}
+                                $backgroundColor={detail.isWin ? color[detail.opponent.name_english] : color.gray}
+                                $isWin={detail.isWin}
+                                onClick={() => openReadModal(detail.id)}
+                            >
                                 {detail.opponent.name_korean.split(' ')[0]}
                             </Opponent>
                         ))}

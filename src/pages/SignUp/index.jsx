@@ -40,7 +40,10 @@ export default function SignUp() {
                     if (signupError) {
                         fireErrorSwal('회원가입에 실패하였습니다.');
                     } else {
-                        fireSuccessSwal({ text: '회원가입에 성공하였습니다.', afterConfirm: () => navigate('/signin') });
+                        fireSuccessSwal({
+                            text: '회원가입에 성공하였습니다.',
+                            afterConfirm: () => navigate('/signin')
+                        });
                     }
                 }
             }
@@ -51,7 +54,14 @@ export default function SignUp() {
         <Wrap>
             <Container>
                 <Title>KBO Calendar</Title>
-                <AuthForm category="signup" label="회원가입" data={values} handleChange={handleChange} handleSelect={handleSelect} handleSubmit={handleSignUp} />
+                <AuthForm
+                    category="signup"
+                    label="회원가입"
+                    data={values}
+                    handleChange={handleChange}
+                    handleSelect={handleSelect}
+                    handleSubmit={handleSignUp}
+                />
                 <Button category="sub" label="로그인" handleClick={() => navigate('/signin')} />
             </Container>
         </Wrap>
