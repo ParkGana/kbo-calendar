@@ -13,7 +13,7 @@ export const Background = styled.div`
         justify-content: center;
         align-items: center;
         background-color: rgba(0, 0, 0, 0.7);
-        z-index: 2;
+        z-index: 10;
     `}
 `;
 
@@ -21,15 +21,15 @@ export const Container = styled.form`
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 1rem;
     background-color: ${color.white};
-    border-radius: 10px;
-    padding: 30px;
+    border-radius: 1rem;
+    padding: 2rem;
 `;
 
 export const Description = styled.p`
     ${typography.title3};
     color: ${color.black};
     text-align: center;
-    margin-top: 60px;
+    margin-top: 3rem;
 `;

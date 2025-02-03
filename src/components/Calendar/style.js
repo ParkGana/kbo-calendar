@@ -6,13 +6,13 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 1rem;
 `;
 
 export const HeadContainer = styled.div`
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 1rem;
 `;
 
 export const Arrow = styled.p`
@@ -38,8 +38,9 @@ export const Month = styled.p`
 `;
 
 export const BodyContainer = styled.div`
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(7, minmax(calc(100% / 7), 160px));
+    grid-template-columns: repeat(7, 1fr);
 `;
 
 export const Day = styled.div`
@@ -49,14 +50,14 @@ export const Day = styled.div`
         ${typography.title3};
         color: ${$isSaturday ? color.saturday : $isSunday ? color.sunday : color.weekdays};
         text-align: center;
-        padding: 10px;
+        padding: 0.5rem;
     `}
 `;
 
 export const Plus = styled.p`
     position: absolute;
     top: 0;
-    right: 5px;
+    right: 0.25rem;
     display: none;
     ${typography.body1};
     color: ${color.gray};
@@ -68,16 +69,14 @@ export const Plus = styled.p`
 `;
 
 export const DateContainer = styled.div`
-    height: calc((100vh - 336px) / 6);
-    min-height: 90px;
-    max-height: 120px;
+    height: 6rem;
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 0.25rem;
     background-color: ${color.white};
     outline: 1px solid ${color.gray};
-    padding: 5px 10px;
+    padding: 0.5rem;
 
     &:hover ${Plus} {
         display: block;
@@ -86,7 +85,6 @@ export const DateContainer = styled.div`
 
 export const Date = styled.p`
     ${({ $isSaturday, $isSunday }) => `
-        width: 20px;
         ${typography.body2};
         color: ${$isSaturday ? color.saturday : $isSunday ? color.sunday : color.weekdays};
     `}
@@ -96,11 +94,11 @@ export const Opponent = styled.p`
     ${({ $backgroundColor, $isWin }) => `
         width: 100%;
         background-color: ${$backgroundColor};
-        opacity: ${$isWin ? '1' : '0.4'};
+        opacity: ${$isWin ? '1' : '0.5'};
         ${typography.body3};
         color: ${color.white};
         text-align: center;
-        padding: 4px 0;
+        padding: 0.25rem 0;
         cursor: pointer;
     `}
 `;

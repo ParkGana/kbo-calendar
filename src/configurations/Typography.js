@@ -1,61 +1,61 @@
 export const typography = {
     headline1: `
-        font-size: 36px;
+        font-size: 2.25rem;
         font-weight: 900;
-        line-height: 40px; 
+        line-height: 2.5rem;
     `,
 
     headline2: `
-        font-size: 30px;
+        font-size: 1.875rem;
         font-weight: 900;
-        line-height: 34px; 
+        line-height: 2.125rem;
     `,
 
     headline3: `
-        font-size: 24px;
+        font-size: 1.5rem;
         font-weight: 900;
-        line-height: 28px; 
+        line-height: 1.75rem;
     `,
 
     title1: `
-        font-size: 24px;
+        font-size: 1.5rem;
         font-weight: 700;
-        line-height: 28px; 
+        line-height: 1.75rem;
     `,
 
     title2: `
-        font-size: 20px;
+        font-size: 1.25rem;
         font-weight: 700;
-        line-height: 24px; 
+        line-height: 1.5rem;
     `,
 
     title3: `
-        font-size: 16px;
+        font-size: 1rem;
         font-weight: 700;
-        line-height: 20px; 
+        line-height: 1.25rem;
     `,
 
     body1: `
-        font-size: 16px;
+        font-size: 1rem;
         font-weight: 400;
-        line-height: 20px; 
+        line-height: 1.25rem;
     `,
 
     body2: `
-        font-size: 14px;
+        font-size: 0.875rem;
         font-weight: 400;
-        line-height: 18px; 
+        line-height: 1.125rem;
     `,
 
     body3: `
-        font-size: 12px;
+        font-size: 0.75rem;
         font-weight: 400;
-        line-height: 16px; 
+        line-height: 1rem;
     `,
 
     body4: `
-        font-size: 10px;
+        font-size: 0.625rem;
         font-weight: 400;
-        line-height: 14px; 
+        line-height: 0.875rem;
     `
 };

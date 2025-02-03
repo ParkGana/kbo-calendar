@@ -5,20 +5,20 @@ import { typography } from '../../configurations/Typography';
 export const Wrap = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    gap: 20px;
-    padding: 40px;
+    padding: 2rem;
 `;
 
 export const Container = styled.div`
+    width: 90vw;
+    max-width: 75rem;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 2rem;
     background-color: ${color.white};
-    border-radius: 10px;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-    padding: 40px;
+    border-radius: 1rem;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+    padding: 2rem;
 `;
 
 export const TopContainer = styled.div`
@@ -30,10 +30,11 @@ export const TopContainer = styled.div`
 export const Filter = styled.div`
     display: flex;
     align-items: center;
-    gap: 10px;
 `;
 
 export const Option = styled.p`
+    padding: 0.5rem;
+
     ${({ $isSelected }) => `
         ${typography.title3};
         color: ${$isSelected ? color.black : color.gray};
@@ -44,7 +45,7 @@ export const Option = styled.p`
 export const User = styled.div`
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 0.5rem;
     cursor: pointer;
 `;
 
@@ -54,8 +55,8 @@ export const Name = styled.p`
 `;
 
 export const Thumbnail = styled.div`
-    width: 50px;
-    height: 50px;
+    width: 3rem;
+    height: 3rem;
     background-color: ${color.gray};
     border-radius: 50%;
 `;

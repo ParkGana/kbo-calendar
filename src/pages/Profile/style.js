@@ -5,34 +5,31 @@ import { typography } from '../../configurations/Typography';
 export const Wrap = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    gap: 20px;
-    padding: 40px;
+    gap: 1.5rem;
+    padding: 2rem;
 `;
 
 export const Container = styled.div`
-    width: calc(100vw - 80px);
-    max-width: 800px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    width: 90vw;
+    max-width: 50rem;
+    position: relative;
     background-color: ${color.white};
-    border-radius: 10px;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-    padding: 30px;
+    border-radius: 1rem;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+    padding: 2rem;
 `;
 
 export const User = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 1rem;
 `;
 
 export const Thumbnail = styled.div`
-    width: 200px;
-    height: 200px;
+    width: 12rem;
+    height: 12rem;
     background-color: ${color.gray};
     border-radius: 50%;
 `;
@@ -40,7 +37,7 @@ export const Thumbnail = styled.div`
 export const Description = styled.p`
     ${typography.body1};
     color: ${color.black};
-    margin-top: 20px;
+    margin-top: 1rem;
 `;
 
 export const Name = styled.p`
@@ -50,13 +47,13 @@ export const Name = styled.p`
 
 export const Radio = styled.div`
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
-    gap: 20px 10px;
+    grid-template-columns: repeat(auto-fill, minmax(4rem, 1fr));
+    gap: 1rem 0.5rem;
 `;
 
 export const Image = styled.img`
     ${({ $isMy }) => `
-        width: 60px;
+        width: 4rem;
         ${!$isMy && `opacity: 0.2;`};
         cursor: pointer;
     `}

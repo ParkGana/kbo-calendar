@@ -5,22 +5,21 @@ import { color } from '../../configurations/Color';
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 1rem;
     outline: 1px solid ${color.gray};
-    padding: 20px 10px;
+    padding: 1rem;
 `;
 
 export const HeadContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 10px;
 `;
 
 export const YearContainer = styled.div`
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 0.5rem;
 `;
 
 export const Arrow = styled.p`
@@ -42,30 +41,25 @@ export const Total = styled.p`
 export const BodyContainer = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 0.5rem;
 `;
 
 export const TeamContainer = styled.div`
-    width: calc(100vw - 180px);
-    max-width: 1100px;
-    height: calc((100vh - 390px) / 9);
-    min-height: 50px;
-    max-height: 60px;
+    width: 100%;
+    height: 3rem;
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding-right: 10px;
+    gap: 0.5rem;
+    padding-right: 0.5rem;
 `;
 
 export const Team = styled.img`
-    height: calc((100vh - 390px) / 9);
-    min-height: 50px;
-    max-height: 60px;
+    height: 3rem;
 `;
 
 export const PercentContainer = styled.div`
     width: 100%;
-    height: calc(100% - 10px);
+    height: calc(100% - 0.5rem);
     display: flex;
 `;
 
@@ -99,5 +93,5 @@ export const Result = styled.p`
     width: 100%;
     ${typography.body2};
     color: ${color.black};
-    padding: 0 10px;
+    padding: 0 1rem;
 `;

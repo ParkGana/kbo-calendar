@@ -4,19 +4,20 @@ import { typography } from '../../configurations/Typography';
 
 export const TeamContainer = styled.div`
     display: grid;
-    grid-template-columns: 140px 80px 140px;
+    grid-template-columns: 7.5rem 6rem 7.5rem;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 3rem;
 `;
 
 export const Team = styled.img`
-    width: 140px;
+    width: 7.5rem;
 `;
 
 export const InfoContainer = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    align-items: center;
+    gap: 0.5rem;
 `;
 
 export const Info = styled.p`
@@ -28,11 +29,10 @@ export const Info = styled.p`
 export const Radio = styled.div`
     display: flex;
     align-items: center;
-    gap: 10px;
 `;
 
 export const Label = styled.label`
-    width: 50px;
+    width: 3rem;
 `;
 
 export const Option = styled.p`
@@ -50,7 +50,7 @@ export const HiddenInput = styled.input`
 
 export const ResultContainer = styled.div`
     display: grid;
-    grid-template-columns: 140px 80px 140px;
+    grid-template-columns: 7.5rem 6rem 7.5rem;
 `;
 
 export const Result = styled.p`
@@ -67,7 +67,7 @@ export const Input = styled.input`
         ${$category === 'score' ? typography.headline1 : typography.title3};
         color: ${color.black};
         text-align: center;
-        padding: 5px;
+        padding: 0.25rem;
 
         &::placeholder {
             color: ${color.gray};

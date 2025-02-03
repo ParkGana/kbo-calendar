@@ -5,24 +5,25 @@ import { typography } from '../../configurations/Typography';
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 1rem;
 `;
 
 export const TeamContainer = styled.div`
     display: grid;
-    grid-template-columns: 140px 80px 140px;
+    grid-template-columns: 7.5rem 6rem 7.5rem;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 3rem;
 `;
 
 export const Team = styled.img`
-    width: 140px;
+    width: 7.5rem;
 `;
 
 export const InfoContainer = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    align-items: center;
+    gap: 0.5rem;
 `;
 
 export const Info = styled.p`
@@ -33,7 +34,7 @@ export const Info = styled.p`
 
 export const ScoreContainer = styled.div`
     display: grid;
-    grid-template-columns: 140px 80px 140px;
+    grid-template-columns: 7.5rem 6rem 7.5rem;
 `;
 
 export const Score = styled.p`

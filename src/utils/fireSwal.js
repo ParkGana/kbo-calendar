@@ -8,7 +8,7 @@ export const fireSuccessSwal = ({ text, afterConfirm }) => {
         showCancelButton: false,
         confirmButtonText: '확인',
         confirmButtonColor: '#a5dc86',
-        width: '400px'
+        width: '24rem'
     }).then(() => {
         afterConfirm();
     });
@@ -22,7 +22,7 @@ export const fireWarningSwal = (text) => {
         showCancelButton: false,
         confirmButtonText: '확인',
         confirmButtonColor: '#f8bb86',
-        width: '400px'
+        width: '24rem'
     });
 };
 
@@ -34,7 +34,7 @@ export const fireErrorSwal = (text) => {
         showCancelButton: false,
         confirmButtonText: '확인',
         confirmButtonColor: '#f27474',
-        width: '400px'
+        width: '24rem'
     });
 };
 
@@ -48,7 +48,7 @@ export const fireConfirmSwal = ({ text, afterConfirm }) => {
         cancelButtonText: '취소',
         confirmButtonColor: '#87adbd',
         cancelButtonColor: '#636c74',
-        width: '400px'
+        width: '24rem'
     }).then((result) => {
         if (result.isConfirmed) {
             afterConfirm();

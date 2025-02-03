@@ -5,13 +5,13 @@ import { color } from '../../configurations/Color';
 export const LocationRadio = styled.div`
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 1rem;
 `;
 
 export const OpponentRadio = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
+    gap: 1.5rem;
 `;
 
 export const Label = styled.label`
@@ -23,24 +23,24 @@ export const Option = styled.p`
         ${typography.title3};
         background-color: ${$isSelected ? color.black : color.white};
         border: 1px solid ${$isSelected ? color.white : color.black};
-        border-radius: 4px;
+        border-radius: 0.5rem;
         color: ${$isSelected ? color.white : color.black};
         text-align: center;
-        padding: 10px;
+        padding: 0.75rem;
         cursor: pointer;
     `}
 `;
 
 export const Image = styled.img`
     ${({ $isSelected }) => `
-        width: 100px;
+        width: 6rem;
         cursor: pointer;
 
         ${
             $isSelected &&
             `
                 background-color: ${color.gray};
-                border-radius: 4px;
+                border-radius: 0.5rem;
             `
         };
     `}
