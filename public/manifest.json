@@ -1,0 +1,20 @@
+{
+    "name": "KBO 캘린더",
+    "short_name": "KBO 캘린더",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#FFFFFF",
+    "description": "응원하는 팀의 경기 결과를 캘린더로 관리해보세요!",
+    "icons": [
+        {
+            "src": "icons/192x192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "icons/512x512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ]
+}
