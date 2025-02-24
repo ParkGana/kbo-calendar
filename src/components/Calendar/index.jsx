@@ -14,7 +14,6 @@ import {
     Month,
     NowContainer,
     Opponent,
-    Plus,
     Year
 } from './style';
 import ReadModal from '../ReadModal';
@@ -63,10 +62,13 @@ export default function Calendar() {
                 ))}
                 {schedules?.map(({ day, details }, index) => (
                     <DateContainer key={uuid()}>
-                        <Date $isSaturday={index % 7 === 5} $isSunday={index % 7 === 6}>
+                        <Date
+                            $isSaturday={index % 7 === 5}
+                            $isSunday={index % 7 === 6}
+                            onClick={() => handleOpenCreateModal(day)}
+                        >
                             {day}
                         </Date>
-                        {day && <Plus onClick={() => handleOpenCreateModal(day)}>+</Plus>}
                         {details.map((detail) => (
                             <Opponent
                                 key={detail.id}

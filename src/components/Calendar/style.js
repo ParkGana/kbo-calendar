@@ -54,20 +54,6 @@ export const Day = styled.div`
     `}
 `;
 
-export const Plus = styled.p`
-    position: absolute;
-    top: 0;
-    right: 0.25rem;
-    display: none;
-    ${typography.body1};
-    color: ${color.gray};
-    cursor: pointer;
-
-    &:hover {
-        ${typography.title3};
-    }
-`;
-
 export const DateContainer = styled.div`
     height: 6rem;
     position: relative;
@@ -77,16 +63,14 @@ export const DateContainer = styled.div`
     background-color: ${color.white};
     outline: 1px solid ${color.gray};
     padding: 0.5rem;
-
-    &:hover ${Plus} {
-        display: block;
-    }
 `;
 
 export const Date = styled.p`
     ${({ $isSaturday, $isSunday }) => `
         ${typography.body2};
+        width: fit-content;
         color: ${$isSaturday ? color.saturday : $isSunday ? color.sunday : color.weekdays};
+        cursor: pointer;
     `}
 `;
 
