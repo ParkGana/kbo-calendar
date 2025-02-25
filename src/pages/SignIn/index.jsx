@@ -35,6 +35,18 @@ export default function SignIn() {
         });
     };
 
+    /* 게스트 계정으로 로그인 */
+    const handleSignInGuest = async () => {
+        const { error } = await login({
+            email: import.meta.env.VITE_GUEST_EMAIL,
+            password: import.meta.env.VITE_GUEST_PASSWORD
+        });
+
+        if (!error) {
+            fireSuccessSwal({ text: '로그인에 성공하였습니다.', afterConfirm: () => navigate('/') });
+        }
+    };
+
     return (
         <Wrap>
             <Container>
@@ -46,7 +58,10 @@ export default function SignIn() {
                     handleChange={handleChange}
                     handleSubmit={handleSignIn}
                 />
-                <Button category="sub" label="회원가입" handleClick={() => navigate('/signup')} />
+                <div>
+                    <Button category="sub" label="회원가입" handleClick={() => navigate('/signup')} />
+                    <Button category="sub" label="게스트 계정으로 서비스 둘러보기" handleClick={handleSignInGuest} />
+                </div>
             </Container>
         </Wrap>
     );
