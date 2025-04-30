@@ -56,5 +56,10 @@ export const fetchRecords = async ({ user, schedules, teams }) => {
         }
     }
 
-    return { win, draw, lose, details: records.sort((a, b) => b.draw - a.draw).sort((a, b) => b.win - a.win) };
+    return {
+        win,
+        draw,
+        lose,
+        details: records.sort((a, b) => a.lose - b.lose).sort((a, b) => b.win - a.win)
+    };
 };
