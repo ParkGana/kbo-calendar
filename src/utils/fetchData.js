@@ -18,7 +18,8 @@ export const fetchCalendar = async ({ user, year, month, schedules }) => {
         dates[index].details.push({
             id: schedule.id,
             opponent: isHome ? schedule.team_away : schedule.team_home,
-            isWin: isHome ? schedule.score_home > schedule.score_away : schedule.score_away > schedule.score_home
+            isWin: isHome ? schedule.score_home > schedule.score_away : schedule.score_away > schedule.score_home,
+            isDraw: schedule.score_home === schedule.score_away
         });
     }
 

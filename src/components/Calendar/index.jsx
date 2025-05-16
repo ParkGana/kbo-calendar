@@ -72,7 +72,13 @@ export default function Calendar() {
                         {details.map((detail) => (
                             <Opponent
                                 key={detail.id}
-                                $backgroundColor={detail.isWin ? color[detail.opponent.name_english] : color.gray}
+                                $backgroundColor={
+                                    detail.isWin
+                                        ? color[detail.opponent.name_english]
+                                        : detail.isDraw
+                                        ? color.green
+                                        : color.gray
+                                }
                                 $isWin={detail.isWin}
                                 onClick={() => openReadModal(detail.id)}
                             >

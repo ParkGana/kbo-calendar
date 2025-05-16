@@ -3,6 +3,7 @@ export const color = {
     black: '#000000',
     gray: '#aaaaaa',
     red: '#ff0000',
+    green:'#6fd193',
 
     weekdays: 'rgba(0, 0, 0, 0.5)',
     saturday: 'rgba(0, 0, 255, 0.5)',

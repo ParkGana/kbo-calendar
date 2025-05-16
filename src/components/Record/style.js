@@ -68,6 +68,8 @@ export const Percent = styled.div`
         display: flex;
         align-items: center;
         overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
 
         &:first-child {
             width: ${($count / $total) * 100}%;

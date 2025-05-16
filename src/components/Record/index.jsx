@@ -43,6 +43,7 @@ export default function Record() {
                                 {record.win > 0 && <Result>{record.win}승</Result>}
                             </Percent>
                             <Percent $total={record.win + record.draw + record.lose} $count={record.draw}>
+                                {record.draw > 0 && <Result>{record.draw}무</Result>}
                             </Percent>
                             <Percent $total={record.win + record.draw + record.lose} $count={record.lose}>
                                 {record.lose > 0 && <Result>{record.lose}패</Result>}
